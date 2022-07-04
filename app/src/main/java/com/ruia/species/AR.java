@@ -63,7 +63,7 @@ public class AR extends AppCompatActivity {
             ProjectName = extras.getString("projectName");
 
         switch (ProjectName){
-            case "Dermascape":
+            case "Monitor Lizard":
                 if (checkSystemSupport(this)) {
                     arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
                     //ArFragment is linked up with its respective id used in the activity_main.xml
@@ -73,7 +73,7 @@ public class AR extends AppCompatActivity {
                         if (clickNo == 1) {
                             Anchor anchor = hitResult.createAnchor();
                             ModelRenderable.builder()
-                                    .setSource(this, R.raw.gfg_gold_text_stand_2)
+                                    .setSource(this, R.raw.monitorlizard)
                                     .setIsFilamentGltf(true)
                                     .build()
                                     .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
@@ -88,57 +88,7 @@ public class AR extends AppCompatActivity {
                     return;
                 }
                 break;
-            case "Auriscape":
-                if (checkSystemSupport(this)) {
-                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
-                    //ArFragment is linked up with its respective id used in the activity_main.xml
-                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
-                        clickNo++;
-                        //the 3d model comes to the scene only when clickNo is one that means once
-                        if (clickNo == 1) {
-                            Anchor anchor = hitResult.createAnchor();
-                            ModelRenderable.builder()
-                                    .setSource(this, R.raw.gfg_gold_text_stand_2)
-                                    .setIsFilamentGltf(true)
-                                    .build()
-                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
-                                    .exceptionally(throwable -> {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
-                                        return null;
-                                    });
-                        }
-                    });
-                } else {
-                    return;
-                }
-                break;
-            case "Magvue":
-                if (checkSystemSupport(this)) {
-                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
-                    //ArFragment is linked up with its respective id used in the activity_main.xml
-                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
-                        clickNo++;
-                        //the 3d model comes to the scene only when clickNo is one that means once
-                        if (clickNo == 1) {
-                            Anchor anchor = hitResult.createAnchor();
-                            ModelRenderable.builder()
-                                    .setSource(this, R.raw.gfg_gold_text_stand_2)
-                                    .setIsFilamentGltf(true)
-                                    .build()
-                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
-                                    .exceptionally(throwable -> {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
-                                        return null;
-                                    });
-                        }
-                    });
-                } else {
-                    return;
-                }
-                break;
-            case "Put All":
+            case "Demo":
                 if (checkSystemSupport(this)) {
                     arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
                     //ArFragment is linked up with its respective id used in the activity_main.xml

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SPECIES</string>
+    <string name="sign_in">Sign In</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">OR</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="text">Text</string>
+    <string name="no_acc_sign_up">Don\'t have an account ? Sign up</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hav_acc_sign_p">Have an account? Sign In</string>
 </resources>

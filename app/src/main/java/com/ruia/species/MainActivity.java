@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         // here we have created new array list and added data to it.
         projectModelArrayList = new ArrayList<>();
-        projectModelArrayList.add(new ProjectModel("Auriscape", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
-        projectModelArrayList.add(new ProjectModel("Dermascape", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
-        projectModelArrayList.add(new ProjectModel("Magvue", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
-        projectModelArrayList.add(new ProjectModel("Put All", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
+        projectModelArrayList.add(new ProjectModel("Monitor Lizard", R.drawable.monitor_lizard, R.drawable.monitor_lizard));
+        projectModelArrayList.add(new ProjectModel("Demo", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
+
 
         // we are initializing our adapter class and passing our arraylist to it.
         ProjectAdapter projectAdapter = new ProjectAdapter(this, projectModelArrayList);

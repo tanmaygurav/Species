@@ -30,36 +30,34 @@
 
         <!--ImageVIew to display our Course Image-->
         <ImageView
-            android:id="@+id/idProjectImage"
+            android:id="@+id/idSpecimenImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:contentDescription="@string/app_name"
             android:padding="5dp" />
 
         <!--Text View to display Course Name-->
         <TextView
-            android:id="@+id/idProjectName"
+            android:id="@+id/idSpecimenCommonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@id/idProjectImage"
-            android:text="Project Name"
+            android:layout_toEndOf="@id/idSpecimenImage"
+            android:text="Common Name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/idProjectLogo"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_toEndOf="@id/idProjectImage"
-            android:layout_below="@id/idProjectName"
-            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/idSpecimenSciName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idSpecimenCommonName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/idSpecimenImage"
+            android:text="Scientific Name"/>
 
         <!--Text VIew to display COurse Rating-->
         <!--Image used in present in drawable folder-->
