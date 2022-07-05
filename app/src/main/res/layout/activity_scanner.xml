@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome,"
         android:textAlignment="center"
-        android:textSize="25dp"/>
+        android:textSize="25sp"/>
     <TextView
         android:id="@+id/idUserName"
         android:layout_width="match_parent"
@@ -20,14 +20,30 @@
         android:text="Username"
         android:layout_below="@+id/idWelcome"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="30sp"
         />
+    <androidx.camera.view.PreviewView
+        android:id="@+id/idActivityScannerPreviewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/idUserName">
+
+
+    </androidx.camera.view.PreviewView>
     <Button
-        android:id="@+id/idSpecimenList"
+        android:id="@+id/idQRCodeFoundButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="List"/>
+        android:text="QR Code Found"
+        android:layout_alignParentBottom="true"
+        />
+
+    <!--    <Button-->
+<!--        android:id="@+id/idSpecimenList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:text="List"/>-->
 
 
 

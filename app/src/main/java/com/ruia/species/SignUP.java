@@ -11,6 +11,7 @@ import android.widget.EditText;
 public class SignUP extends AppCompatActivity {
     private Button signInBtn;
     private EditText email;
+    private String name= "Username";
 
 
     @Override
@@ -25,7 +26,12 @@ public class SignUP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUP.this, Scanner.class);
-                intent.putExtra("name",email.getText());
+                if (email.getText().toString()==null){
+                   name = "Username";
+                }else{
+                    name=email.getText().toString();
+                }
+                intent.putExtra("name",name);
                 startActivity(intent);
             }
         });

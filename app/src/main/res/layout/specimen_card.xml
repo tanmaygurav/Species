@@ -49,6 +49,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/idSpecimenSciName"
             android:layout_width="wrap_content"
@@ -57,7 +58,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idSpecimenImage"
-            android:text="Scientific Name"/>
+            android:text="Scientific Name" />
 
         <!--Text VIew to display COurse Rating-->
         <!--Image used in present in drawable folder-->

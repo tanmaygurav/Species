@@ -88,6 +88,31 @@ public class AR extends AppCompatActivity {
                     return;
                 }
                 break;
+            case "Rabbit":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.rabbit)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
             case "Demo":
                 if (checkSystemSupport(this)) {
                     arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
