@@ -113,6 +113,156 @@ public class AR extends AppCompatActivity {
                     return;
                 }
                 break;
+            case "Bee":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.bee)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
+            case "Jellyfish":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.jellyfish)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
+            case "Komodo Dragon":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.komododragon)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
+            case "Ulysses Butterfly":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.ulyssesbutterfly)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
+            case "Octopus":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.ocutopus)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
+            case "SeaHorse":
+                if (checkSystemSupport(this)) {
+                    arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+                    //ArFragment is linked up with its respective id used in the activity_main.xml
+                    arCam.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                        clickNo++;
+                        //the 3d model comes to the scene only when clickNo is one that means once
+                        if (clickNo == 1) {
+                            Anchor anchor = hitResult.createAnchor();
+                            ModelRenderable.builder()
+                                    .setSource(this, R.raw.seahorse)
+                                    .setIsFilamentGltf(true)
+                                    .build()
+                                    .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
+                                    .exceptionally(throwable -> {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                        builder.setMessage("Something is not right" + throwable.getMessage()).show();
+                                        return null;
+                                    });
+                        }
+                    });
+                } else {
+                    return;
+                }
+                break;
             case "Demo":
                 if (checkSystemSupport(this)) {
                     arCam = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arCameraArea);

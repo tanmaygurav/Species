@@ -10,15 +10,16 @@
         android:id="@+id/idWelcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome,"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="25sp"/>
+
     <TextView
         android:id="@+id/idUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Username"
         android:layout_below="@+id/idWelcome"
+        android:text="@string/username"
         android:textAlignment="center"
         android:textSize="30sp"
         />
@@ -30,13 +31,15 @@
 
 
     </androidx.camera.view.PreviewView>
+
     <Button
         android:id="@+id/idQRCodeFoundButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="QR Code Found"
         android:layout_alignParentBottom="true"
-        />
+        android:text="@string/qr_code_found"
+        android:textSize="30sp"
+        android:layout_marginBottom="30dp"/>
 
     <!--    <Button-->
 <!--        android:id="@+id/idSpecimenList"-->

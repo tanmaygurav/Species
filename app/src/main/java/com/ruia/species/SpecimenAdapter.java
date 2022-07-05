@@ -53,7 +53,7 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
-        private ImageView specimenImage;
+        private ImageView specimenImage,formaldehydeIndicator;
         private TextView commonNameTV,ScientificNameTV;
 
         public Viewholder(@NonNull View itemView) {

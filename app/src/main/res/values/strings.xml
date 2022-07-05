@@ -10,4 +10,7 @@
     <string name="no_acc_sign_up">Don\'t have an account ? Sign up</string>
     <string name="sign_up">Sign Up</string>
     <string name="hav_acc_sign_p">Have an account? Sign In</string>
+    <string name="qr_code_found">QR Code Found</string>
+    <string name="username">Username</string>
+    <string name="welcome">Welcome,</string>
 </resources>

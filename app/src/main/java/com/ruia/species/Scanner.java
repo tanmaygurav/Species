@@ -32,6 +32,8 @@ public class Scanner extends AppCompatActivity {
     private TextView UsernameDisplay;
     private Button qrCodeFoundButton;
     private String qrCode;
+    private final String username="Username";
+
 
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private PreviewView previewView;
@@ -43,18 +45,17 @@ public class Scanner extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         
         previewView=findViewById(R.id.idActivityScannerPreviewView);
-        UsernameDisplay =findViewById(R.id.idUserName);
+        UsernameDisplay =(TextView) findViewById(R.id.idUserName);
         qrCodeFoundButton=findViewById(R.id.idQRCodeFoundButton);
 
-        Intent iin= getIntent();
-        Bundle b = iin.getExtras();
-
-        if(b!=null)
+        Intent intent=getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null)
         {
-            String j =(String) b.getString("name");
+            String j =(String) extras.getString("name");
             UsernameDisplay.setText(j);
         }else {
-            UsernameDisplay.setText("Username");
+            UsernameDisplay.setText(username);
         }
 
         qrCodeFoundButton.setVisibility(View.INVISIBLE);
