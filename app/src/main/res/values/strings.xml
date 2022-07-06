@@ -13,4 +13,12 @@
     <string name="qr_code_found">QR Code Found</string>
     <string name="username">Username</string>
     <string name="welcome">Welcome,</string>
+    <string name="change_formaldehyde">Change Formaldehyde</string>
+    <string name="last_changed_on">Last Changed on :</string>
+    <string name="expected_change_on">Expected Change on :</string>
+    <string name="cupboard_number">Cupboard Number :</string>
+    <string name="scan_qr_code">Scan QR code</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="common_name">Common Name</string>
+    <string name="scientific_name">Scientific Name</string>
 </resources>

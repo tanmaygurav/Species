@@ -58,8 +58,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idSpecimenImage"
-            android:text="Cupboard No."
-            />
+            android:text="Cupboard No." />
         <TextView
             android:id="@+id/idCupboardNumber"
             android:layout_width="wrap_content"
@@ -69,6 +68,27 @@
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idCupboardNumberHeader"
             android:text="10" />
+        <TextView
+            android:id="@+id/idFormaldehydeIndicatorTextHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idCupboardNumberHeader"
+            android:layout_toEndOf="@id/idSpecimenImage"
+            android:text="@string/change_formaldehyde"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/idFormaldehydeIndicatorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idFormaldehydeIndicatorTextHeader"
+            android:layout_toEndOf="@id/idSpecimenImage"
+            android:text="Time"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            />
 
         <ImageView
             android:id="@+id/idFormaldehydeIndicator"

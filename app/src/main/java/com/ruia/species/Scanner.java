@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 public class Scanner extends AppCompatActivity {
@@ -132,11 +134,21 @@ public class Scanner extends AppCompatActivity {
             public void onQRCodeFound(String _qrCode) {
                 qrCode = _qrCode;
                 qrCodeFoundButton.setVisibility(View.VISIBLE);
+//                Toast.makeText(getApplicationContext(), qrCode, Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(Scanner.this,MainActivity.class);
+//                intent.putExtra("Cupboard",qrCode);
+//                startActivity(intent);
             }
 
             @Override
             public void qrCodeNotFound() {
-                qrCodeFoundButton.setVisibility(View.INVISIBLE);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        qrCodeFoundButton.setVisibility(View.INVISIBLE);
+                    }
+                },10000);
+
             }
         }));
 

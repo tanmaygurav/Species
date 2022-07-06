@@ -1,13 +1,16 @@
 package com.ruia.species;
 
-public class SpecimenModel {
-    private String common_name,scientific_name, cupboardNumber;
-    private int specimen_image,formaldehydeChange;
+import java.util.Date;
 
-    public SpecimenModel(String common_name, String scientific_name, String cupboardNumber, int specimen_image, int formaldehydeChange) {
+public class SpecimenModel {
+    private String common_name,scientific_name, cupboardNumber,formaldehydeChangeTimer;
+    private int specimen_image,formaldehydeChange;
+    private Date lastChanged,expectedChange;
+
+    public SpecimenModel(String common_name, String cupboardNumber, String formaldehydeChangeTimer, int specimen_image, int formaldehydeChange) {
         this.common_name = common_name;
-        this.scientific_name = scientific_name;
         this.cupboardNumber = cupboardNumber;
+        this.formaldehydeChangeTimer = formaldehydeChangeTimer;
         this.specimen_image = specimen_image;
         this.formaldehydeChange = formaldehydeChange;
     }
@@ -18,11 +21,28 @@ public class SpecimenModel {
         this.specimen_image = specimen_image;
     }
 
-    public SpecimenModel(String common_name, String cupboardNumber, int specimen_image, int formaldehydeChange) {
-        this.common_name = common_name;
-        this.cupboardNumber = cupboardNumber;
-        this.specimen_image = specimen_image;
-        this.formaldehydeChange = formaldehydeChange;
+    public String getFormaldehydeChangeTimer() {
+        return formaldehydeChangeTimer;
+    }
+
+    public void setFormaldehydeChangeTimer(String formaldehydeChangeTimer) {
+        this.formaldehydeChangeTimer = formaldehydeChangeTimer;
+    }
+
+    public Date getLastChanged() {
+        return lastChanged;
+    }
+
+    public void setLastChanged(Date lastChanged) {
+        this.lastChanged = lastChanged;
+    }
+
+    public Date getExpectedChange() {
+        return expectedChange;
+    }
+
+    public void setExpectedChange(Date expectedChange) {
+        this.expectedChange = expectedChange;
     }
 
     public String getCupboardNumber() {

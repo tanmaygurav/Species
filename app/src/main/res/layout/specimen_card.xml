@@ -45,7 +45,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idSpecimenImage"
-            android:text="Common Name"
+            android:text="@string/common_name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -58,7 +58,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idSpecimenImage"
-            android:text="Scientific Name" />
+            android:text="@string/scientific_name" />
 
         <!--Text VIew to display COurse Rating-->
         <!--Image used in present in drawable folder-->
