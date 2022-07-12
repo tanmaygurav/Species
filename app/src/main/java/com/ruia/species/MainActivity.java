@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ProjectModel> projectModelArrayList;
     private ArrayList<SpecimenModel> specimenModelArrayList;
     String Cupboard=null;
+    private TextView cupboardNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         projectRV = findViewById(R.id.idRVProject);
+        cupboardNumber= findViewById(R.id.idCupboardNumberHeader);
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null)
             Cupboard = extras.getString("Cupboard");
+
+        cupboardNumber.setText(Cupboard.toString());
 
 // Insert old code Here
 

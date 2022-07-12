@@ -23,23 +23,15 @@
         android:textAlignment="center"
         android:textSize="30sp"
         />
-    <androidx.camera.view.PreviewView
-        android:id="@+id/idActivityScannerPreviewView"
+
+    <eu.livotov.labs.android.camview.ScannerLiveView
+        android:id="@+id/idCamView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/idUserName">
 
 
-    </androidx.camera.view.PreviewView>
-
-    <Button
-        android:id="@+id/idQRCodeFoundButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/qr_code_found"
-        android:textSize="30sp"
-        android:layout_marginBottom="30dp"/>
+    </eu.livotov.labs.android.camview.ScannerLiveView>
 
     <!--    <Button-->
 <!--        android:id="@+id/idSpecimenList"-->

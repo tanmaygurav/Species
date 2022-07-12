@@ -5,11 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/idCupboardNumberHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/cupboard_number"
+        android:textSize="35dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVProject"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/idCupboardNumberHeader"/>
 
 
 </RelativeLayout>

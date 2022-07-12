@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.ar.core.Anchor;
@@ -24,7 +25,8 @@ public class AR extends AppCompatActivity {
     private ArFragment arCam; //object of ArFragment Class
 
     private int clickNo = 0; //helps to render the 3d model only once when we tap the screen
-    String ProjectName=null;
+    String ProjectName=null,ScientificName=null;
+    TextView commonName, SciName;
 
 
     public static boolean checkSystemSupport(Activity activity) {
@@ -56,12 +58,24 @@ public class AR extends AppCompatActivity {
         setContentView(R.layout.activity_ar);
 
 
+        commonName=findViewById(R.id.idSpecimenCommonName);
+        SciName=findViewById(R.id.idSpecimenSciName);
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null)
+            try{
             ProjectName = extras.getString("projectName");
+            ScientificName= extras.getString("SciName");
+            }finally {
+                ProjectName = extras.getString("Common Name");
+                ScientificName= extras.getString("Sci Name");
+            }
 
+
+        commonName.setText(ProjectName);
+        SciName.setText(ScientificName);
+        
         switch (ProjectName){
             case "Monitor Lizard":
                 if (checkSystemSupport(this)) {

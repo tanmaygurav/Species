@@ -1,5 +1,7 @@
 package com.ruia.species;
 
+import android.widget.TextView;
+
 import java.util.Date;
 
 public class SpecimenModel {
@@ -19,6 +21,9 @@ public class SpecimenModel {
         this.common_name = common_name;
         this.scientific_name = scientific_name;
         this.specimen_image = specimen_image;
+    }
+
+    public SpecimenModel(TextView commonName, TextView sciName) {
     }
 
     public String getFormaldehydeChangeTimer() {
