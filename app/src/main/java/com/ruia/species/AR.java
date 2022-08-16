@@ -63,19 +63,20 @@ public class AR extends AppCompatActivity {
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
-        if(extras != null)
-            try{
+        if(extras != null){
+//            try{
             ProjectName = extras.getString("projectName");
             ScientificName= extras.getString("SciName");
-            }finally {
-                ProjectName = extras.getString("Common Name");
-                ScientificName= extras.getString("Sci Name");
+//            }finally {
+//                ProjectName = extras.getString("Common Name");
+//                ScientificName= extras.getString("Sci Name");
+//            }
             }
 
 
         commonName.setText(ProjectName);
         SciName.setText(ScientificName);
-        
+
         switch (ProjectName){
             case "Monitor Lizard":
                 if (checkSystemSupport(this)) {

@@ -70,21 +70,25 @@ public class Scanner extends AppCompatActivity {
 
             @Override
             public void onCodeScanned(String data) {
-                String Name= String.valueOf(data.split(" "));
-                for (int i = 1; i < Name.length(); i++) {
-                    SciName=i+" ";
-                }
-                String checkCupboard = String.valueOf(data.split("",0));
-                if (checkCupboard=="Cupboard") {
-                    Intent intent = new Intent(Scanner.this, MainActivity.class);
-                    intent.putExtra("Cupboard", data);
-                    startActivity(intent);
-                }else {
-                    Intent intent = new Intent(Scanner.this, AR.class);
-                    intent.putExtra("Common Name", checkCupboard);
-                    intent.putExtra("Sci Name", SciName);
-                    startActivity(intent);
-                }
+
+                Intent intent = new Intent(Scanner.this, MainActivity.class);
+                intent.putExtra("Cupboard", data);
+                startActivity(intent);
+//                String Name= String.valueOf(data.split(" "));
+//                for (int i = 1; i < Name.length(); i++) {
+//                    SciName=i+" ";
+//                }
+//                String checkCupboard = String.valueOf(data.split("",0));
+//                if (checkCupboard=="Cupboard") {
+//                    Intent intent = new Intent(Scanner.this, MainActivity.class);
+//                    intent.putExtra("Cupboard", data);
+//                    startActivity(intent);
+//                }else {
+//                    Intent intent = new Intent(Scanner.this, AR.class);
+//                    intent.putExtra("Common Name", checkCupboard);
+//                    intent.putExtra("Sci Name", SciName);
+//                    startActivity(intent);
+//                }
             }
         });
     }
