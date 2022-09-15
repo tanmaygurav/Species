@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
@@ -73,7 +76,7 @@ public class SpecimenDetails extends AppCompatActivity {
     }
 
     private void getDetails() {
-//        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
+        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
         String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
 
         Thread thread= new Thread(new Runnable() {
@@ -85,6 +88,10 @@ public class SpecimenDetails extends AppCompatActivity {
                     try {
                         Response response = client.newCall(request).execute();
                         Log.d(TAG, "getDetails: "+response.body().string());
+                        updateViews(response);
+                        if (loading.isShowing()) {
+                            loading.dismiss();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -97,5 +104,21 @@ public class SpecimenDetails extends AppCompatActivity {
 
         thread.start();
 
+    }
+
+    private void updateViews(Response response) {
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray= jsonObject.getJSONArray("details");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject currentSpecimen = jsonArray.getJSONObject(i);
+                if (currentSpecimen.toString().equals(selectedSpecimen)){
+                    commonName.setText(currentSpecimen.getString("Common Name"));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
