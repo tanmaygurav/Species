@@ -24,4 +24,10 @@
     <string name="admin_panel">Admin Panel</string>
     <string name="common_name">Common Name</string>
     <string name="scientific_name">Scientific Name</string>
+    <string name="kingdom">Kingdom</string>
+    <string name="infrakingdom">Infra-Kingdom</string>
+    <string name="grade">Grade</string>
+    <string name="division">Division</string>
+    <string name="sub_division">Sub-Division</string>
+    <string name="subkingdom">Subkingdom</string>
 </resources>
