@@ -57,5 +57,15 @@ public class SignIN extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        adminPage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent = new Intent(SignIN.this,MainActivity.class);
+                intent.putExtra("Cupboard","Cupboard");
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 }

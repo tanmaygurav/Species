@@ -45,4 +45,6 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha14"
     implementation 'com.google.zxing:core:3.3.0'
     implementation ('eu.livotov.labs.android:CAMView:2.0.1@aar') {transitive=true}
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
 }

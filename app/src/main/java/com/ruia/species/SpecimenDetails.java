@@ -2,15 +2,29 @@ package com.ruia.species;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class SpecimenDetails extends AppCompatActivity {
+    private static final String TAG = "SpecimenDetails";
     TextView commonName, sciName, kingdom, subKingdom, infraKingdom, grade, division,
             subDivision, phylum, group, subPhylum, superClass, class1, subClass,
             infraClass, superOrder, order, subOrder, infraOrder, family, genus, description, ref;
     Button audio, extLinks, view3D;
+    String selectedSpecimen;
+    ProgressDialog loading;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +58,44 @@ public class SpecimenDetails extends AppCompatActivity {
         audio=findViewById(R.id.idAudio);
         extLinks=findViewById(R.id.idExternalLinks);
         view3D=findViewById(R.id.idView3DModel);
+
+        getDetails();
+        Intent intent=getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null){
+//            try{
+            selectedSpecimen= extras.getString("SciName");
+//            }finally {
+//                ProjectName = extras.getString("Common Name");
+//                ScientificName= extras.getString("Sci Name");
+//            }
+        }
+    }
+
+    private void getDetails() {
+//        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
+        String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
+
+        Thread thread= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url(url).build();
+                    try {
+                        Response response = client.newCall(request).execute();
+                        Log.d(TAG, "getDetails: "+response.body().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
 
     }
 }

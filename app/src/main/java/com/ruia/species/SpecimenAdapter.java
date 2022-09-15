@@ -40,7 +40,7 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,AR.class);
+                Intent intent = new Intent(context,SpecimenDetails.class);
                 intent.putExtra("projectName",model.getCommon_name());
                 intent.putExtra("SciName",model.getScientific_name());
                 context.startActivity(intent);

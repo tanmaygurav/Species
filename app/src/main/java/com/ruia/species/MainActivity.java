@@ -43,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
 //        projectRV.setAdapter(specimenAdapter);
 //        Cupboard 1 list
         switch (Cupboard){
+            case "Cupboard":
+                specimenModelArrayList = new ArrayList<>();
+                specimenModelArrayList.add(new SpecimenModel("Rabbit","Oryctolagus cuniculus",R.drawable.rabbit));
+                specimenModelArrayList.add(new SpecimenModel("Bee","Apis mellifera",R.drawable.bee));
+                specimenModelArrayList.add(new SpecimenModel("Jellyfish","Scyphozoa",R.drawable.jellyfish));
+                specimenModelArrayList.add(new SpecimenModel("Komodo Dragon","Varanus komodoensis",R.drawable.komododragon));
+                specimenModelArrayList.add(new SpecimenModel("Ulysses Butterfly","Papilio ulysses",R.drawable.ulyssesbutterfly));
+                specimenModelArrayList.add(new SpecimenModel("Monarch Butterfly","Danaus plexippus",R.drawable.monrachbutterfly));
+                specimenModelArrayList.add(new SpecimenModel("Octopus","Octopoda",R.drawable.ocutopus));
+                specimenModelArrayList.add(new SpecimenModel("SeaHorse","Hippocampus",R.drawable.seahorse));
+                SpecimenAdapter specimenAdapter0 = new SpecimenAdapter(this,specimenModelArrayList);
+                projectRV.setAdapter(specimenAdapter0);
+                break;
             case "Cupboard 1":
                 specimenModelArrayList = new ArrayList<>();
                 specimenModelArrayList.add(new SpecimenModel("Rabbit","Oryctolagus cuniculus",R.drawable.rabbit));

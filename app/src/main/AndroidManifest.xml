@@ -67,7 +67,7 @@
         android:required="true" /> <!-- Permission for camera -->
     <uses-feature android:name="android.hardware.camera.any" /> <!-- Permission to vibrate -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>
