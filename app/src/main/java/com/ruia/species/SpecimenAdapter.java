@@ -44,6 +44,7 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
                 Intent intent = new Intent(context,SpecimenDetails.class);
                 intent.putExtra("projectName",model.getCommon_name());
                 intent.putExtra("SciName",model.getScientific_name());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

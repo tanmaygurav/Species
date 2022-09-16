@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -84,10 +86,19 @@ public class MainActivity extends AppCompatActivity {
         });
         thread.start();
 
-        SpecimenAdapter specimenAdapter = new SpecimenAdapter(this,specimenModelArrayList);
-        projectRV.setAdapter(specimenAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         projectRV.setLayoutManager(linearLayoutManager);
+//        SpecimenAdapter specimenAdapter = new SpecimenAdapter(this,specimenModelArrayList);
+//        projectRV.setAdapter(specimenAdapter);
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SpecimenAdapter specimenAdapter = new SpecimenAdapter(getApplicationContext(),specimenModelArrayList);
+                projectRV.setAdapter(specimenAdapter);
+            }
+        }, 5000);
 
 
 
