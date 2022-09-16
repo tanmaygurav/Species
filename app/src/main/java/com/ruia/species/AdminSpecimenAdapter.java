@@ -1,6 +1,7 @@
 package com.ruia.species;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class AdminSpecimenAdapter extends RecyclerView.Adapter<AdminSpecimenAdap
         SpecimenModel model = specimenModelArrayList.get(position);
         holder.commonNameTV.setText(model.getCommon_name());
         holder.cupboardNumber.setText(model.getCupboardNumber());
-        holder.specimenImage.setImageResource(model.getSpecimen_image());
+        holder.specimenImage.setImageURI(Uri.parse(model.getSpecimen_image()));
         holder.formaldehydeIndicator.setImageResource(model.getFormaldehydeChange());
     }
 

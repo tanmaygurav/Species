@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+
 public class SignIN extends AppCompatActivity {
     private Button signInBtn;
     private EditText email;
@@ -21,6 +23,7 @@ public class SignIN extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        FirebaseApp.initializeApp(getApplicationContext());
 
         signInBtn=findViewById(R.id.idSignInBTN);
         email=findViewById(R.id.idEmailSignInET);
@@ -62,7 +65,7 @@ public class SignIN extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 Intent intent = new Intent(SignIN.this,MainActivity.class);
-                intent.putExtra("Cupboard","Cupboard");
+                intent.putExtra("Cupboard","All Specimens");
                 startActivity(intent);
                 return true;
             }

@@ -1,31 +1,42 @@
 package com.ruia.species;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.widget.Button;
 import android.widget.TextView;
+
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 import java.io.IOException;
+
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class SpecimenDetails extends AppCompatActivity {
+    String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
     private static final String TAG = "SpecimenDetails";
     TextView commonName, sciName, kingdom, subKingdom, infraKingdom, grade, division,
             subDivision, phylum, group, subPhylum, superClass, class1, subClass,
             infraClass, superOrder, order, subOrder, infraOrder, family, genus, description, ref;
+    String commonNameTxt, sciNameTxt, kingdomTxt, subKingdomTxt, infraKingdomTxt, gradeTxt, divisionTxt,
+            subDivisionTxt, phylumTxt, groupTxt, subPhylumTxt, superClassTxt, class1Txt, subClassTxt,
+            infraClassTxt, superOrderTxt, orderTxt, subOrderTxt, infraOrderTxt, familyTxt, genusTxt, descriptionTxt, refTxt;
     Button audio, extLinks, view3D;
     String selectedSpecimen;
     ProgressDialog loading;
+    OkHttpClient client = new OkHttpClient();
 
 
 
@@ -62,61 +73,184 @@ public class SpecimenDetails extends AppCompatActivity {
         extLinks=findViewById(R.id.idExternalLinks);
         view3D=findViewById(R.id.idView3DModel);
 
+
         getDetails();
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null){
-//            try{
             selectedSpecimen= extras.getString("SciName");
-//            }finally {
-//                ProjectName = extras.getString("Common Name");
-//                ScientificName= extras.getString("Sci Name");
-//            }
+            Log.d(TAG, "onCreate: SciName"+selectedSpecimen);
         }
+        
+        view3D.setOnClickListener(view -> {
+            Intent intent1 = new Intent(getApplicationContext(),AR.class);
+            intent1.putExtra("SciName",selectedSpecimen);
+            startActivity(intent1);
+        });
     }
+
+
 
     private void getDetails() {
         loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
-        String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
+        Thread thread= new Thread(() -> {
+            try {
 
-        Thread thread= new Thread(new Runnable() {
-            @Override
-            public void run() {
+                Request request = new Request.Builder().url(url).build();
                 try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url(url).build();
-                    try {
-                        Response response = client.newCall(request).execute();
-                        Log.d(TAG, "getDetails: "+response.body().string());
-                        updateViews(response);
-                        if (loading.isShowing()) {
-                            loading.dismiss();
+                    Response response = client.newCall(request).execute();
+                    String jsonData = response.body().string();
+//                        Log.d(TAG, "run: jsonData"+jsonData);
+                    JSONObject Jobject = new JSONObject(jsonData);
+                    JSONArray Jarray = Jobject.getJSONArray("details");
+                    for (int i = 0; i < Jarray.length(); i++) {
+                        JSONObject object = Jarray.getJSONObject(i);
+//                            Log.d(TAG, "run: object.toString"+object.toString());
+                        sciNameTxt= object.getString("Scientific Name");
+                        Log.d(TAG, "run: sciNameTxt"+sciNameTxt);
+                        if (sciNameTxt.equals(selectedSpecimen)){
+
+
+                            SpecimenDetails.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getValues(object);
+                                }
+                            });
+                            break;
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
-                }catch (Exception e){
+                    if (loading.isShowing()) {
+                        loading.dismiss();
+                    }
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+            }catch (Exception e){
+                e.printStackTrace();
             }
+
         });
 
         thread.start();
 
     }
 
-    private void updateViews(Response response) {
+    private void getValues(JSONObject object) {
         try {
-            JSONObject jsonObject=new JSONObject(response);
-            JSONArray jsonArray= jsonObject.getJSONArray("details");
+            commonNameTxt=object.getString("Common Name");
+            sciNameTxt=object.getString("Scientific Name");
+            kingdomTxt=object.getString("Kingdom");
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject currentSpecimen = jsonArray.getJSONObject(i);
-                if (currentSpecimen.toString().equals(selectedSpecimen)){
-                    commonName.setText(currentSpecimen.getString("Common Name"));
-                }
-            }
+            subKingdomTxt=object.getString("Sub-Kingdom");
+            if (subKingdomTxt.isEmpty() || subKingdomTxt.equals("Other")) subKingdomTxt= object.getString("Sub-Kingdom2");
+            if (subKingdomTxt.isEmpty()) subKingdomTxt="Not Available";
+
+            infraKingdomTxt=object.getString("Infra-Kingdom");
+            if (infraKingdomTxt.isEmpty() || infraKingdomTxt.equals("Other")) infraKingdomTxt= object.getString("Infra-Kingdom2");
+            if (infraKingdomTxt.isEmpty()) infraKingdomTxt="Not Available";
+
+            gradeTxt=object.getString("Grade");
+            if (gradeTxt.isEmpty() || gradeTxt.equals("Other")) gradeTxt= object.getString("Grade2");
+            if (gradeTxt.isEmpty()) gradeTxt="Not Available";
+
+            divisionTxt=object.getString("Division");
+            if (divisionTxt.isEmpty() || divisionTxt.equals("Other")) divisionTxt= object.getString("Division2");
+            if (divisionTxt.isEmpty()) divisionTxt="Not Available";
+
+            subDivisionTxt=object.getString("Sub-Division");
+            if (subDivisionTxt.isEmpty() || subDivisionTxt.equals("Other")) subDivisionTxt= object.getString("Sub-Division2");
+            if (subDivisionTxt.isEmpty()) subDivisionTxt="Not Available";
+
+            phylumTxt=object.getString("Phylum");
+            if (phylumTxt.isEmpty() || phylumTxt.equals("Other")) phylumTxt= object.getString("Phylum2");
+            if (phylumTxt.isEmpty()) phylumTxt="Not Available";
+
+            groupTxt=object.getString("Group");
+            if (groupTxt.isEmpty() || groupTxt.equals("Other")) groupTxt= object.getString("Group2");
+            if (groupTxt.isEmpty()) groupTxt="Not Available";
+
+            subPhylumTxt=object.getString("Sub-Phylum");
+            if (subPhylumTxt.isEmpty() || subPhylumTxt.equals("Other")) subPhylumTxt= object.getString("Sub-Phylum2");
+            if (subPhylumTxt.isEmpty()) subPhylumTxt="Not Available";
+
+            superClassTxt=object.getString("Super-Class");
+            if (superClassTxt.isEmpty() || superClassTxt.equals("Other")) superClassTxt= object.getString("Super-Class2");
+            if (superClassTxt.isEmpty()) superClassTxt="Not Available";
+
+            class1Txt=object.getString("Class");
+            if (class1Txt.isEmpty() || class1Txt.equals("Other")) class1Txt= object.getString("Class2");
+            if (class1Txt.isEmpty()) class1Txt="Not Available";
+
+            subClassTxt=object.getString("Sub-Class");
+            if (subClassTxt.isEmpty() || subClassTxt.equals("Other")) subClassTxt= object.getString("Sub-Class2");
+            if (subClassTxt.isEmpty()) subClassTxt="Not Available";
+
+            infraClassTxt=object.getString("Infra-Class");
+            if (infraClassTxt.isEmpty() || infraClassTxt.equals("Other")) infraClassTxt= object.getString("Infra-Class2");
+            if (infraClassTxt.isEmpty()) infraClassTxt="Not Available";
+
+            superOrderTxt=object.getString("Super-Order");
+            if (superOrderTxt.isEmpty() || superOrderTxt.equals("Other")) superOrderTxt= object.getString("Super-Order2");
+            if (superOrderTxt.isEmpty()) superOrderTxt="Not Available";
+
+            orderTxt=object.getString("Order");
+            if (orderTxt.isEmpty() || orderTxt.equals("Other")) orderTxt= object.getString("Order2");
+            if (orderTxt.isEmpty()) orderTxt="Not Available";
+
+            subOrderTxt=object.getString("Sub-Order");
+            if (subOrderTxt.isEmpty() || subOrderTxt.equals("Other")) subOrderTxt= object.getString("Sub-Order2");
+            if (subOrderTxt.isEmpty()) subOrderTxt="Not Available";
+
+            infraOrderTxt=object.getString("Infra-Order");
+            if (infraOrderTxt.isEmpty() || infraOrderTxt.equals("Other")) infraOrderTxt= object.getString("Infra-Order2");
+            if (infraOrderTxt.isEmpty()) infraOrderTxt="Not Available";
+
+            familyTxt=object.getString("Family");
+            if (familyTxt.isEmpty() || familyTxt.equals("Other")) familyTxt= object.getString("Family2");
+            if (familyTxt.isEmpty()) familyTxt="Not Available";
+
+            genusTxt=object.getString("Genus");
+            if (genusTxt.isEmpty() || genusTxt.equals("Other")) genusTxt= object.getString("Genus2");
+            if (genusTxt.isEmpty()) genusTxt="Not Available";
+
+            descriptionTxt=object.getString("Description");
+            if (descriptionTxt.isEmpty()) descriptionTxt="Not Available";
+
+            refTxt=object.getString("References");
+            if (refTxt.isEmpty()) refTxt="Not Available";
+            updateViews();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateViews() {
+        try {
+            commonName.setText("Common Name: "+commonNameTxt);
+            sciName.setText("Scientific Name: "+sciNameTxt);
+            kingdom.setText("Kingdom: "+kingdomTxt);
+            subKingdom.setText("Sub-Kingdom: "+subKingdomTxt);
+            infraKingdom.setText("Infra-Kingdom: "+infraKingdomTxt);
+            grade.setText("Grade: "+gradeTxt);
+            division.setText("Division: "+divisionTxt);
+            subDivision.setText("Sub-Division: "+subDivisionTxt);
+            phylum.setText("Phylum: "+phylumTxt);
+            group.setText("Group: "+groupTxt);
+            subPhylum.setText("Sub-Phylum: "+subPhylumTxt);
+            superClass.setText("Super-Class: "+superClassTxt);
+            class1.setText("Class: "+class1Txt);
+            subClass.setText("Sub-Class: "+subClassTxt);
+            infraClass.setText("Infra-Class: "+infraClassTxt);
+            superOrder.setText("Super-Order: "+superOrderTxt);
+            order.setText("Order: "+orderTxt);
+            subOrder.setText("Sub-Order: "+subOrderTxt);
+            infraOrder.setText("Infra-Order: "+infraOrderTxt);
+            family.setText("Family: "+familyTxt);
+            genus.setText("Genus: "+genusTxt);
+            description.setText("Description: "+descriptionTxt);
+            ref.setText("References: "+refTxt);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.ruia.species;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
         SpecimenModel model = specimenModelArrayList.get(position);
         holder.commonNameTV.setText(model.getCommon_name());
         holder.ScientificNameTV.setText(model.getScientific_name());
-        holder.specimenImage.setImageResource(model.getSpecimen_image());
+        holder.specimenImage.setImageURI(Uri.parse(model.getSpecimen_image()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

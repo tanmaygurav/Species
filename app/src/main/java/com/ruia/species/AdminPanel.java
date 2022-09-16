@@ -21,7 +21,7 @@ public class AdminPanel extends AppCompatActivity {
 
         projectRV = findViewById(R.id.idRVProject);
 
-        specimenModelArrayList = new ArrayList<>();
+ /*       specimenModelArrayList = new ArrayList<>();
         specimenModelArrayList.add(new SpecimenModel("Rabbit","1","OverDue",R.drawable.rabbit,R.drawable.redball));
         specimenModelArrayList.add(new SpecimenModel("Bee","1","Less Than 1 Days",R.drawable.bee,R.drawable.orangeball));
         specimenModelArrayList.add(new SpecimenModel("Jellyfish","1","Less Than 2 Days",R.drawable.jellyfish,R.drawable.orangeball));
@@ -36,6 +36,6 @@ public class AdminPanel extends AppCompatActivity {
         projectRV.setLayoutManager(linearLayoutManager);
 
         AdminSpecimenAdapter adminSpecimenAdapter = new AdminSpecimenAdapter(this,specimenModelArrayList);
-        projectRV.setAdapter(adminSpecimenAdapter);
+        projectRV.setAdapter(adminSpecimenAdapter);*/
     }
 }

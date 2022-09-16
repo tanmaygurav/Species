@@ -30,4 +30,5 @@
     <string name="division">Division</string>
     <string name="sub_division">Sub-Division</string>
     <string name="subkingdom">Subkingdom</string>
+    <string name="header">Header</string>
 </resources>

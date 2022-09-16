@@ -5,11 +5,11 @@ import android.widget.TextView;
 import java.util.Date;
 
 public class SpecimenModel {
-    private String common_name,scientific_name, cupboardNumber,formaldehydeChangeTimer;
-    private int specimen_image,formaldehydeChange;
+    private String common_name,scientific_name, cupboardNumber,formaldehydeChangeTimer,specimen_image;
+    private int formaldehydeChange;
     private Date lastChanged,expectedChange;
 
-    public SpecimenModel(String common_name, String cupboardNumber, String formaldehydeChangeTimer, int specimen_image, int formaldehydeChange) {
+    public SpecimenModel(String common_name, String cupboardNumber, String formaldehydeChangeTimer, String specimen_image, int formaldehydeChange) {
         this.common_name = common_name;
         this.cupboardNumber = cupboardNumber;
         this.formaldehydeChangeTimer = formaldehydeChangeTimer;
@@ -17,7 +17,7 @@ public class SpecimenModel {
         this.formaldehydeChange = formaldehydeChange;
     }
 
-    public SpecimenModel(String common_name, String scientific_name, int specimen_image) {
+    public SpecimenModel(String common_name, String scientific_name, String specimen_image) {
         this.common_name = common_name;
         this.scientific_name = scientific_name;
         this.specimen_image = specimen_image;
@@ -74,11 +74,11 @@ public class SpecimenModel {
         this.scientific_name = scientific_name;
     }
 
-    public int getSpecimen_image() {
+    public String getSpecimen_image() {
         return specimen_image;
     }
 
-    public void setSpecimen_image(int specimen_image) {
+    public void setSpecimen_image(String specimen_image) {
         this.specimen_image = specimen_image;
     }
 

@@ -4,46 +4,96 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
+    String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
+    private static final String TAG = "MainActivity";
 
-    private RecyclerView projectRV;
-    private ArrayList<ProjectModel> projectModelArrayList;
     private ArrayList<SpecimenModel> specimenModelArrayList;
-    String Cupboard=null;
-    private TextView cupboardNumber;
+    String HeaderTxt="All Specimens";
+    ProgressDialog loading;
+    OkHttpClient client = new OkHttpClient();
+    String commonNameTxt, sciNameTxt,imageTxt;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        projectRV = findViewById(R.id.idRVProject);
-        cupboardNumber= findViewById(R.id.idCupboardNumberHeader);
+        RecyclerView projectRV = findViewById(R.id.idRVProject);
+        TextView header = findViewById(R.id.idSpecimenListHeader);
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null)
-            Cupboard = extras.getString("Cupboard");
+            HeaderTxt = extras.getString("Cupboard");
 
-        cupboardNumber.setText(Cupboard.toString());
+        header.setText(HeaderTxt);
 
-// Insert old code Here
+//Displaying all  specimens
+        specimenModelArrayList = new ArrayList<>();
+        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
+        Thread thread= new Thread(() -> {
+            Log.d(TAG, "run: Thread running");
+            try {
 
-        // we are initializing our adapter class and passing our arraylist to it.
-//        SpecimenAdapter specimenAdapter = new SpecimenAdapter(this,specimenModelArrayList);
-        // here we are creating vertical list so we will provide orientation as vertical
+                Request request = new Request.Builder().url(url).build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String jsonData = Objects.requireNonNull(response.body()).string();
+//                        Log.d(TAG, "run: jsonData"+jsonData);
+                    JSONObject Jobject = new JSONObject(jsonData);
+                    JSONArray Jarray = Jobject.getJSONArray("details");
+                    for (int i = 0; i < Jarray.length(); i++) {
+                        JSONObject object = Jarray.getJSONObject(i);
+                        commonNameTxt=object.getString("Common Name");
+                        sciNameTxt= object.getString("Scientific Name");
+                        imageTxt=object.getString("Image");
+                        Log.d(TAG, "run: SciNames"+sciNameTxt);
+                        SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt,imageTxt);
+                        specimenModelArrayList.add(model);
+                    }
+                    if (loading.isShowing()) {
+                        loading.dismiss();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        });
+        thread.start();
+
+        SpecimenAdapter specimenAdapter = new SpecimenAdapter(this,specimenModelArrayList);
+        projectRV.setAdapter(specimenAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         projectRV.setLayoutManager(linearLayoutManager);
-//        projectRV.setAdapter(specimenAdapter);
-//        Cupboard 1 list
-        switch (Cupboard){
-            case "Cupboard":
+
+
+
+
+        /*switch (HeaderTxt){
+            case "All Specimens":
                 specimenModelArrayList = new ArrayList<>();
                 specimenModelArrayList.add(new SpecimenModel("Rabbit","Oryctolagus cuniculus",R.drawable.rabbit));
                 specimenModelArrayList.add(new SpecimenModel("Bee","Apis mellifera",R.drawable.bee));
@@ -77,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 projectRV.setAdapter(specimenAdapter2);
                 break;
 //  Switch case end here
-        }
+        }*/
 
 
 
