@@ -18,8 +18,8 @@ import static android.Manifest.permission.CAMERA;
 
 public class Scanner extends AppCompatActivity {
 //    private Button specimenlist;
-    private TextView UsernameDisplay;
-    private final String username="Username";
+
+    private final String username="TANMAY";
     private ScannerLiveView camera;
     String SciName;
 
@@ -37,17 +37,9 @@ public class Scanner extends AppCompatActivity {
         }
 
         camera = findViewById(R.id.idCamView);
-        UsernameDisplay = findViewById(R.id.idUserName);
 
-        Intent intent=getIntent();
-        Bundle extras = intent.getExtras();
-        if(extras != null)
-        {
-            String j = extras.getString("name");
-            UsernameDisplay.setText(j);
-        }else {
-            UsernameDisplay.setText(username);
-        }
+
+
 
         camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
             @Override
@@ -80,7 +72,7 @@ public class Scanner extends AppCompatActivity {
                     intent.putExtra("Cupboard", data);
                     startActivity(intent);
                 }else {
-                    Intent intent = new Intent(Scanner.this, AR.class);
+                    Intent intent = new Intent(Scanner.this, MainActivity.class);
                     intent.putExtra("Common Name", checkCupboard);
                     intent.putExtra("Sci Name", SciName);
                     startActivity(intent);

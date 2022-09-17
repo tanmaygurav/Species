@@ -6,29 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".Scanner">
 
-    <TextView
-        android:id="@+id/idWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textAlignment="center"
-        android:textSize="25sp"/>
-
-    <TextView
-        android:id="@+id/idUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/idWelcome"
-        android:text="@string/username"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        />
 
     <eu.livotov.labs.android.camview.ScannerLiveView
         android:id="@+id/idCamView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/idUserName">
+        >
 
 
     </eu.livotov.labs.android.camview.ScannerLiveView>

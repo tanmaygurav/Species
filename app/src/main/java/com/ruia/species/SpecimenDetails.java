@@ -25,7 +25,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class SpecimenDetails extends AppCompatActivity {
-    String url = "https://script.googleusercontent.com/macros/echo?user_content_key=zUjv73MQztNx4Tn3DruKNJ34W6cbGG65mJtueACmB0Kq_iu7NdHOb9AZMjfZzmN_OVEdCNs4ROXGfvZc1VIRbV11w2t6yrEYm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNFki3g1hL3IUOyN12gWNmVBz2p2TKXc9Xuv3WMU4Wnz1LsR9TGQAsYlZRA1hBWNPk8_MUtqX4Zwp4r-nmUQb9Tx90esvHgeXA&lib=MbgrK457YjWEMRj1RpcABUG3CjCSjDOnU";
+    String url = "https://script.googleusercontent.com/macros/echo?user_content_key=0J5tuct4yFB2g6fEWdj_JEXbJ5hHLoQZflDRM1U8g_iii8fS6Nd9Sb810E0MK4pkEtXONm4T19c-aMVlYFHY62ILEPD0aHIAm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnISMKmT4sc-oYr2XF2gzS2kVzK3LJnQf1PUbGcvJ9F1imRpjEuoH3KBIxBXgLlSBCu9v9620l5oJVMnCcIoHKO2DwEENJfcyXNz9Jw9Md8uu&lib=MafhO8DCDQWgRY--MA9fA4s4nyNeH4Rra";
     private static final String TAG = "SpecimenDetails";
     TextView commonName, sciName, kingdom, subKingdom, infraKingdom, grade, division,
             subDivision, phylum, group, subPhylum, superClass, class1, subClass,

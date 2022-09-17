@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home">
+    <TextView
+        android:id="@+id/idWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome,"
+        android:textSize="36sp"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/idUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/username"
+        android:textSize="36sp"
+        android:layout_toEndOf="@id/idWelcome"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/idScanCupboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Cupboard QR Code"
+        android:layout_margin="10dp"
+        android:layout_above="@id/idScanSpecimen"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/idScanSpecimen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Specimen QR Code"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:id="@+id/idAllSpecimens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All Specimens"
+        android:layout_margin="10dp"
+        android:layout_below="@id/idScanSpecimen"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

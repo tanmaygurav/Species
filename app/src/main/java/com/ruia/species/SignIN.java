@@ -34,9 +34,9 @@ public class SignIN extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignIN.this, Scanner.class);
+                Intent intent = new Intent(SignIN.this, Home.class);
                 if (email.getText().toString()==null){
-                    name = "Username";
+                    name = "TANMAY";
                 }else{
                     name=email.getText().toString();
                 }
