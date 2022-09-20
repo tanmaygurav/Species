@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -24,33 +24,122 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-    String url = "https://script.googleusercontent.com/macros/echo?user_content_key=0J5tuct4yFB2g6fEWdj_JEXbJ5hHLoQZflDRM1U8g_iii8fS6Nd9Sb810E0MK4pkEtXONm4T19c-aMVlYFHY62ILEPD0aHIAm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnISMKmT4sc-oYr2XF2gzS2kVzK3LJnQf1PUbGcvJ9F1imRpjEuoH3KBIxBXgLlSBCu9v9620l5oJVMnCcIoHKO2DwEENJfcyXNz9Jw9Md8uu&lib=MafhO8DCDQWgRY--MA9fA4s4nyNeH4Rra";
+    String urlZT = "https://script.googleusercontent.com/macros/echo?user_content_key=0J5tuct4yFB2g6fEWdj_JEXbJ5hHLoQZflDRM1U8g_iii8fS6Nd9Sb810E0MK4pkEtXONm4T19c-aMVlYFHY62ILEPD0aHIAm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnISMKmT4sc-oYr2XF2gzS2kVzK3LJnQf1PUbGcvJ9F1imRpjEuoH3KBIxBXgLlSBCu9v9620l5oJVMnCcIoHKO2DwEENJfcyXNz9Jw9Md8uu&lib=MafhO8DCDQWgRY--MA9fA4s4nyNeH4Rra";
+    String urlBT="https://script.googleusercontent.com/macros/echo?user_content_key=-QNLhxowGiz20OzO8aAiIXPcINq8hOkqmmVFVeb5_YLFL6ywzxqM_LlYq-5O8dv-QyUQ8ObNAcKby4myEgwv9e0DK7q3N_wqm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPAg68g5_LIVhOFliTZOHp_Pe53hTzepE9HKrIBVyWuXk3JRqI14l7eeF2SS8MUv_KlAO8UtLHErd1Nu36CMHRTFHgsModOtfw&lib=Mjs4oHSyTOvACHWjwQDMgGW3CjCSjDOnU";
+    String urlBTI="https://script.googleusercontent.com/macros/echo?user_content_key=gG09FP78K6IKsfRurHG8g4Tn4pkMdL0uGGecLs4r1JNeqQ273-qVcRalTWgBHCNNO3O5AwKVXDleM9uEtU5JnnZw4fLl5M-Dm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnAiK9an07yBTDI2U3irYrpJln3BNZCLekMpgVe8IXUPmCSSIBXfHEuFZuBXkbjDGNCGE-vUmY77T67zS71hMjiJj1CpPWk6Hztz9Jw9Md8uu&lib=MmAOE02fQ8jvJJw3uyo_1hs4nyNeH4Rra";
+
     private static final String TAG = "MainActivity";
 
     private ArrayList<SpecimenModel> specimenModelArrayList;
-    String HeaderTxt="All Specimens";
+    String HeaderTxt="All Specimens",phylum;
     ProgressDialog loading;
     OkHttpClient client = new OkHttpClient();
-    String commonNameTxt, sciNameTxt,imageTxt;
+    String commonNameTxt, sciNameTxt,imageTxt,url;
+    RecyclerView projectRV;
+    Handler handler = new Handler();
+    Runnable runnable;
+    int delay = 10000;
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
 
+    @Override
+    protected void onResume() {
+
+        handler.postDelayed(runnable = new Runnable() {
+            public void run() {
+                handler.postDelayed(runnable, delay);
+                Log.d(TAG, "run: Refresh Triggered");
+                SpecimenAdapter specimenAdapter = new SpecimenAdapter(getApplicationContext(),specimenModelArrayList);
+                projectRV.setAdapter(specimenAdapter);
+            }
+        }, delay);
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView projectRV = findViewById(R.id.idRVProject);
+        projectRV = findViewById(R.id.idRVProject);
         TextView header = findViewById(R.id.idSpecimenListHeader);
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null)
-            HeaderTxt = extras.getString("Cupboard");
+            HeaderTxt = extras.getString("CupboardNo");
+        Log.d(TAG, "onCreate: header"+HeaderTxt);
+        phylum = extras.getString("Phylum");
 
         header.setText(HeaderTxt);
+//      select url for bio or zoo
+        if (HeaderTxt.equals("Zoology Specimens") || (HeaderTxt.substring(0,2).equals("CZ")))getSpecimensZ(urlZT);
+        else if (HeaderTxt.equals("Biology Specimens") || (HeaderTxt.substring(0,2).equals("CB"))) getSpecimensB(urlBT);
+        
+        new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long l) {
+                Log.d(TAG, "onTick: seconds remaining: " + l / 1000);
+            }
 
-//Displaying all  specimens
+            @Override
+            public void onFinish() {
+                handler.removeCallbacks(runnable);
+                Log.d(TAG, "onFinish: Callback removed");
+            }
+        }.start();
+
+    }
+
+    private void getSpecimensB(String url) {
+        specimenModelArrayList = new ArrayList<>();
+        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
+        Thread thread= new Thread(() -> {
+            Log.d(TAG, "run: Thread running");
+            try {
+
+                Request request = new Request.Builder().url(url).build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String jsonData = Objects.requireNonNull(response.body()).string();
+//                        Log.d(TAG, "run: jsonData"+jsonData);
+                    JSONObject Jobject = new JSONObject(jsonData);
+                    JSONArray Jarray = Jobject.getJSONArray("details");
+                    for (int i = 0; i < Jarray.length(); i++) {
+                        JSONObject object = Jarray.getJSONObject(i);
+                        commonNameTxt=object.getString("Common Name");
+                        sciNameTxt= object.getString("Scientific Name");
+                        imageTxt=object.getString("Morphology");
+                        Log.d(TAG, "run: SciNames"+sciNameTxt);
+                        SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt,imageTxt);
+                        specimenModelArrayList.add(model);
+                    }
+                    if (loading.isShowing()) {
+                        loading.dismiss();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+//                loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
+            }
+
+        });
+        thread.start();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        projectRV.setLayoutManager(linearLayoutManager);
+    }
+
+
+
+    private void getSpecimensZ(String url) {
         specimenModelArrayList = new ArrayList<>();
         loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
         Thread thread= new Thread(() -> {
@@ -78,9 +167,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
                 }
             }catch (Exception e){
                 e.printStackTrace();
+//                loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
             }
 
         });
@@ -88,69 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         projectRV.setLayoutManager(linearLayoutManager);
-//        SpecimenAdapter specimenAdapter = new SpecimenAdapter(this,specimenModelArrayList);
-//        projectRV.setAdapter(specimenAdapter);
-
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SpecimenAdapter specimenAdapter = new SpecimenAdapter(getApplicationContext(),specimenModelArrayList);
-                projectRV.setAdapter(specimenAdapter);
-            }
-        }, 5000);
-
-
-
-
-        /*switch (HeaderTxt){
-            case "All Specimens":
-                specimenModelArrayList = new ArrayList<>();
-                specimenModelArrayList.add(new SpecimenModel("Rabbit","Oryctolagus cuniculus",R.drawable.rabbit));
-                specimenModelArrayList.add(new SpecimenModel("Bee","Apis mellifera",R.drawable.bee));
-                specimenModelArrayList.add(new SpecimenModel("Jellyfish","Scyphozoa",R.drawable.jellyfish));
-                specimenModelArrayList.add(new SpecimenModel("Komodo Dragon","Varanus komodoensis",R.drawable.komododragon));
-                specimenModelArrayList.add(new SpecimenModel("Ulysses Butterfly","Papilio ulysses",R.drawable.ulyssesbutterfly));
-                specimenModelArrayList.add(new SpecimenModel("Monarch Butterfly","Danaus plexippus",R.drawable.monrachbutterfly));
-                specimenModelArrayList.add(new SpecimenModel("Octopus","Octopoda",R.drawable.ocutopus));
-                specimenModelArrayList.add(new SpecimenModel("SeaHorse","Hippocampus",R.drawable.seahorse));
-                SpecimenAdapter specimenAdapter0 = new SpecimenAdapter(this,specimenModelArrayList);
-                projectRV.setAdapter(specimenAdapter0);
-                break;
-            case "Cupboard 1":
-                specimenModelArrayList = new ArrayList<>();
-                specimenModelArrayList.add(new SpecimenModel("Rabbit","Oryctolagus cuniculus",R.drawable.rabbit));
-                specimenModelArrayList.add(new SpecimenModel("Bee","Apis mellifera",R.drawable.bee));
-                specimenModelArrayList.add(new SpecimenModel("Jellyfish","Scyphozoa",R.drawable.jellyfish));
-                specimenModelArrayList.add(new SpecimenModel("Komodo Dragon","Varanus komodoensis",R.drawable.komododragon));
-
-                SpecimenAdapter specimenAdapter1 = new SpecimenAdapter(this,specimenModelArrayList);
-                projectRV.setAdapter(specimenAdapter1);
-                break;
-            case "Cupboard 2":
-                specimenModelArrayList = new ArrayList<>();
-                specimenModelArrayList.add(new SpecimenModel("Ulysses Butterfly","Papilio ulysses",R.drawable.ulyssesbutterfly));
-                specimenModelArrayList.add(new SpecimenModel("Monarch Butterfly","Danaus plexippus",R.drawable.monrachbutterfly));
-                specimenModelArrayList.add(new SpecimenModel("Octopus","Octopoda",R.drawable.ocutopus));
-                specimenModelArrayList.add(new SpecimenModel("SeaHorse","Hippocampus",R.drawable.seahorse));
-
-                SpecimenAdapter specimenAdapter2 = new SpecimenAdapter(this,specimenModelArrayList);
-                projectRV.setAdapter(specimenAdapter2);
-                break;
-//  Switch case end here
-        }*/
-
-
-
     }
 
 }
-//        Dynamic project list code
-// here we have created new array list and added data to it.
-//        projectModelArrayList = new ArrayList<>();
-//        projectModelArrayList.add(new ProjectModel("Monitor Lizard", R.drawable.monitor_lizard, R.drawable.monitor_lizard));
-//        projectModelArrayList.add(new ProjectModel("Demo", R.drawable.gfg_gold_text_stand_2, R.drawable.gfg_gold_text_stand_2));
-
-
-// we are initializing our adapter class and passing our arraylist to it.
-//        ProjectAdapter projectAdapter = new ProjectAdapter(this, projectModelArrayList);

@@ -53,6 +53,7 @@
             android:layout_marginBottom="5dp"
             android:text="@string/scientific_name"
             android:textSize="24sp"/>
+
         <TextView
             android:id="@+id/idSpecimenSciName"
             android:layout_width="wrap_content"
@@ -64,7 +65,7 @@
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/idCommonNameHeader"
             android:text="@string/scientific_name"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/idKingdomHeader"
@@ -99,12 +100,12 @@
             android:layout_alignParentEnd="true"
             android:text="@string/more"
             android:textColor="@color/teal_200"
-            android:layout_marginRight="20dp"/>
+            android:layout_margin="20dp"/>
 
         <RelativeLayout
             android:id="@+id/idMoreKingdomViews"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/idKingdom">
 
             <TextView
@@ -561,15 +562,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/idGenus"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"
+                android:layout_margin="20dp"
                 android:text="@string/more"
                 android:textColor="@color/teal_200" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/idMoreGenusViews"
+            android:layout_below="@id/idMoreKingdomViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            >
 
         <TextView
             android:id="@+id/idDescriptionHeader"

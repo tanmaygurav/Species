@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,11 @@ import static android.Manifest.permission.CAMERA;
 
 public class Scanner extends AppCompatActivity {
 //    private Button specimenlist;
-
+    private static final String TAG = "Scanner";
     private final String username="TANMAY";
     private ScannerLiveView camera;
-    String SciName;
+    String SciName,cupboardNo, phylum;
+    String [] split;
 
 
     @Override
@@ -37,10 +39,6 @@ public class Scanner extends AppCompatActivity {
         }
 
         camera = findViewById(R.id.idCamView);
-
-
-
-
         camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
             @Override
             public void onScannerStarted(ScannerLiveView scanner) {
@@ -62,20 +60,22 @@ public class Scanner extends AppCompatActivity {
 
             @Override
             public void onCodeScanned(String data) {
-                String Name= String.valueOf(data.split(" "));
-                for (int i = 1; i < Name.length(); i++) {
-                    SciName=i+" ";
-                }
-                String checkCupboard = String.valueOf(data.split("",0));
-                if (checkCupboard=="Cupboard") {
+                Log.d(TAG, "onCodeScanned: qr"+data);
+                String checkCupboard =data.substring(0,2);
+                Log.d(TAG, "onCodeScanned: checkCupboard"+checkCupboard);
+                if (checkCupboard.equals("CB") || checkCupboard.equals("CZ")) {
+                    Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
+                    split=data.split("_",0);
+                    cupboardNo=split[0];
+                    phylum=split[1];
                     Intent intent = new Intent(Scanner.this, MainActivity.class);
-                    intent.putExtra("Cupboard", data);
+                    intent.putExtra("CupboardNo", cupboardNo);
+                    intent.putExtra("Phylum", phylum);
                     startActivity(intent);
                 }else {
-                    Intent intent = new Intent(Scanner.this, MainActivity.class);
-                    intent.putExtra("Common Name", checkCupboard);
-                    intent.putExtra("Sci Name", SciName);
-                    startActivity(intent);
+                    Intent intent1 = new Intent(Scanner.this, SpecimenDetails.class);
+                    intent1.putExtra("SciName", data);
+                    startActivity(intent1);
                 }
             }
         });

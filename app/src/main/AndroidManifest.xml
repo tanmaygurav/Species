@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ruia.species">
-
+    <!-- Permission to vibrate -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SPECIES"
         tools:targetApi="31">
+        <activity
+            android:name=".ModelCheck"
+            android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="false" />
@@ -64,8 +67,9 @@
     </application>
     <uses-feature
         android:glEsVersion="0x00030000"
-        android:required="true" /> <!-- Permission for camera -->
-    <uses-feature android:name="android.hardware.camera.any" /> <!-- Permission to vibrate -->
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-feature
         android:name="android.hardware.camera.ar"
         android:required="true" />
