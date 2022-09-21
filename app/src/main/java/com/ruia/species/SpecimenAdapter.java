@@ -39,7 +39,8 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
         SpecimenModel model = specimenModelArrayList.get(position);
         holder.commonNameTV.setText(model.getCommon_name());
         holder.ScientificNameTV.setText(model.getScientific_name());
-        try {
+        Picasso.get().load(model.getSpecimen_image()).into(holder.specimenImage);
+        /*try {
 
             String s= model.getSpecimen_image();
             Log.d("Adapter", "onBindViewHolder: substring"+s.substring(0,24));
@@ -55,8 +56,7 @@ public class SpecimenAdapter extends RecyclerView.Adapter<SpecimenAdapter.Viewho
 
         }catch (Exception e){
             e.printStackTrace();
-        }
-//
+        }*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

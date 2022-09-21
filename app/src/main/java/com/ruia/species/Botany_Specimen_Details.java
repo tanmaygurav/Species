@@ -1,107 +1,82 @@
 package com.ruia.species;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
-
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SpecimenDetails extends AppCompatActivity {
-    String urlZT = "https://script.googleusercontent.com/macros/echo?user_content_key=0J5tuct4yFB2g6fEWdj_JEXbJ5hHLoQZflDRM1U8g_iii8fS6Nd9Sb810E0MK4pkEtXONm4T19c-aMVlYFHY62ILEPD0aHIAm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnISMKmT4sc-oYr2XF2gzS2kVzK3LJnQf1PUbGcvJ9F1imRpjEuoH3KBIxBXgLlSBCu9v9620l5oJVMnCcIoHKO2DwEENJfcyXNz9Jw9Md8uu&lib=MafhO8DCDQWgRY--MA9fA4s4nyNeH4Rra";
+public class Botany_Specimen_Details extends AppCompatActivity {
     String urlBT="https://script.googleusercontent.com/macros/echo?user_content_key=0UTF_YlcTosLx4LvfI8Y-jqHq5uNMxLNUlQo50ys0a-mOydPhE-vOmVsK862DsTgZMbwXQbRHYRnRoVcIFVQi-SCXx18CLOfm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPAg68g5_LIVhOFliTZOHp_Pe53hTzepE9HKrIBVyWuXk3JRqI14l7eeF2SS8MUv_KlAO8UtLHErd1Nu36CMHRTFHgsModOtfw&lib=Mjs4oHSyTOvACHWjwQDMgGW3CjCSjDOnU";
-    private static final String TAG = "SpecimenDetails";
-    TextView commonName, sciName, kingdom, subKingdom, infraKingdom, grade, division,
-            subDivision, phylum, group, subPhylum, superClass, class1, subClass,
-            infraClass, superOrder, order, subOrder, infraOrder, family, genus, description, ref;
-    String commonNameTxt, sciNameTxt, kingdomTxt, subKingdomTxt, infraKingdomTxt, gradeTxt, divisionTxt,
-            subDivisionTxt, phylumTxt, groupTxt, subPhylumTxt, superClassTxt, class1Txt, subClassTxt,
-            infraClassTxt, superOrderTxt, orderTxt, subOrderTxt, infraOrderTxt, familyTxt, genusTxt, descriptionTxt, refTxt;
-    ImageView specimenImage;
+    private static final String TAG = "Botany_Specimen_Details";
+    TextView commonName, sciName, kingdom, division, subDivision, class1, subClass,
+            order, subOrder, series, cohort, family, genus, description, ref1, ref2, ref3;
+    String commonNameTxt, sciNameTxt, kingdomTxt, divisionTxt, subDivisionTxt, class1Txt, subClassTxt,
+            orderTxt, subOrderTxt, seriesTxt, cohortTxt, familyTxt, genusTxt, descriptionTxt, ref1Txt,
+            ref2Txt, ref3Txt,morphImageTxt,reproImageTxt;
+    Button morphImage, reproImage;
     RelativeLayout moreKingdomViews, moreGenusViews;
     TextView moreKingdom,moreGenus;
-    Button audio, extLinks, view3D;
     String selectedSpecimen;
     ProgressDialog loading;
     OkHttpClient client = new OkHttpClient();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_specimen_details);
+        setContentView(R.layout.activity_botany_specimen_details);
 
         commonName=findViewById(R.id.idSpecimenCommonName);
         sciName=findViewById(R.id.idSpecimenSciName);
         kingdom=findViewById(R.id.idKingdom);
-        subKingdom=findViewById(R.id.idSubKingdom);
-        infraKingdom=findViewById(R.id.idInfraKingdom);
-        grade=findViewById(R.id.idGrade);
         division=findViewById(R.id.idDivision);
         subDivision=findViewById(R.id.idSubDivision);
-        phylum=findViewById(R.id.idPhylum);
-        group=findViewById(R.id.idGroup);
-        subPhylum=findViewById(R.id.idSubPhylum);
-        superClass=findViewById(R.id.idSuperClass);
         class1=findViewById(R.id.idClass);
         subClass=findViewById(R.id.idSubClass);
-        infraClass=findViewById(R.id.idInfraClass);
-        superOrder=findViewById(R.id.idSuperOrder);
         order=findViewById(R.id.idOrder);
         subOrder=findViewById(R.id.idSubOrder);
-        infraOrder=findViewById(R.id.idInfraOrder);
+        series=findViewById(R.id.idSeries);
+        cohort=findViewById(R.id.idCohort);
         family=findViewById(R.id.idFamily);
         genus=findViewById(R.id.idGenus);
         description=findViewById(R.id.idDescription);
-        ref=findViewById(R.id.idReferences);
-        specimenImage=findViewById(R.id.idSpecimenImage);
+        ref1=findViewById(R.id.idReferences1);
+        ref2=findViewById(R.id.idReferences2);
+        ref3=findViewById(R.id.idReferences3);
 
-        audio=findViewById(R.id.idAudio);
-        extLinks=findViewById(R.id.idExternalLinks);
-        view3D=findViewById(R.id.idView3DModel);
+        morphImage=findViewById(R.id.idMorphologyImage);
+        reproImage=findViewById(R.id.idReproductiveImage);
 
         moreKingdom=findViewById(R.id.idMoreKingdom);
         moreGenus=findViewById(R.id.idMoreGenus);
         moreGenusViews=findViewById(R.id.idMoreGenusViews);
         moreKingdomViews=findViewById(R.id.idMoreKingdomViews);
 
-
-        getDetails();
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
         if(extras != null){
             selectedSpecimen= extras.getString("SciName");
             Log.d(TAG, "onCreate: SciName"+selectedSpecimen);
         }
+        getDetails();
 //        show first view till kingdom only hide rest
         moreKingdomViews.setVisibility(View.GONE);
         moreGenusViews.setVisibility(View.GONE);
@@ -117,20 +92,34 @@ public class SpecimenDetails extends AppCompatActivity {
             moreGenus.setVisibility(View.GONE);
         });
 
-        view3D.setOnClickListener(view -> {
-            Intent intent1 = new Intent(getApplicationContext(),ModelCheck.class);
-            intent1.putExtra("SciName",selectedSpecimen);
-            startActivity(intent1);
+        morphImage.setOnClickListener(view -> {
+            if (!morphImageTxt.equals("Not Available")) {
+                Intent intent1 = new Intent(getApplicationContext(), FullScrnImage.class);
+                intent1.putExtra("link", morphImageTxt);
+                startActivity(intent1);
+            }else {
+                Toast.makeText(getApplicationContext(),"Image not Available",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        reproImage.setOnClickListener(view -> {
+            if (!reproImageTxt.equals("Not Available")) {
+                Intent intent1 = new Intent(getApplicationContext(), FullScrnImage.class);
+                intent1.putExtra("link", reproImageTxt);
+                startActivity(intent1);
+            }else {
+                Toast.makeText(getApplicationContext(),"Image not Available",Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
-
-
 
     private void getDetails() {
         loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
         Thread thread= new Thread(() -> {
             try {
-                Request request = new Request.Builder().url(urlZT).build();
+                Request request = new Request.Builder().url(urlBT).build();
                 try {
                     Response response = client.newCall(request).execute();
                     String jsonData = Objects.requireNonNull(response.body()).string();
@@ -143,7 +132,7 @@ public class SpecimenDetails extends AppCompatActivity {
                         sciNameTxt= object.getString("Scientific Name");
                         Log.d(TAG, "run: sciNameTxt"+sciNameTxt);
                         if (sciNameTxt.equals(selectedSpecimen)){
-                            SpecimenDetails.this.runOnUiThread(() -> getValues(object));
+                            Botany_Specimen_Details.this.runOnUiThread(() -> getValues(object));
                             break;
                         }
                     }
@@ -160,83 +149,38 @@ public class SpecimenDetails extends AppCompatActivity {
         });
 
         thread.start();
-
     }
 
     private void getValues(JSONObject object) {
+
         try {
             commonNameTxt=object.getString("Common Name");
             sciNameTxt=object.getString("Scientific Name");
             kingdomTxt=object.getString("Kingdom");
 
-//            specimenImage.setImageBitmap(getBitmapFromURL(object.getString("Image")));
-
-//            specimenImage.setImageURI(Uri.parse(object.getString("Image")));
-            Picasso.get().load(object.getString("Image")).into(specimenImage);
-
-            subKingdomTxt=object.getString("Sub-Kingdom");
-            if (subKingdomTxt.isEmpty() || subKingdomTxt.equals("Other")) subKingdomTxt= object.getString("Sub-Kingdom2");
-            if (subKingdomTxt.isEmpty()) subKingdomTxt="Not Available";
-
-            infraKingdomTxt=object.getString("Infra-Kingdom");
-            if (infraKingdomTxt.isEmpty() || infraKingdomTxt.equals("Other")) infraKingdomTxt= object.getString("Infra-Kingdom2");
-            if (infraKingdomTxt.isEmpty()) infraKingdomTxt="Not Available";
-
-            gradeTxt=object.getString("Grade");
-            if (gradeTxt.isEmpty() || gradeTxt.equals("Other")) gradeTxt= object.getString("Grade2");
-            if (gradeTxt.isEmpty()) gradeTxt="Not Available";
-
             divisionTxt=object.getString("Division");
-            if (divisionTxt.isEmpty() || divisionTxt.equals("Other")) divisionTxt= object.getString("Division2");
             if (divisionTxt.isEmpty()) divisionTxt="Not Available";
 
             subDivisionTxt=object.getString("Sub-Division");
-            if (subDivisionTxt.isEmpty() || subDivisionTxt.equals("Other")) subDivisionTxt= object.getString("Sub-Division2");
             if (subDivisionTxt.isEmpty()) subDivisionTxt="Not Available";
 
-            phylumTxt=object.getString("Phylum");
-            if (phylumTxt.isEmpty() || phylumTxt.equals("Other")) phylumTxt= object.getString("Phylum2");
-            if (phylumTxt.isEmpty()) phylumTxt="Not Available";
-
-            groupTxt=object.getString("Group");
-            if (groupTxt.isEmpty() || groupTxt.equals("Other")) groupTxt= object.getString("Group2");
-            if (groupTxt.isEmpty()) groupTxt="Not Available";
-
-            subPhylumTxt=object.getString("Sub-Phylum");
-            if (subPhylumTxt.isEmpty() || subPhylumTxt.equals("Other")) subPhylumTxt= object.getString("Sub-Phylum2");
-            if (subPhylumTxt.isEmpty()) subPhylumTxt="Not Available";
-
-            superClassTxt=object.getString("Super-Class");
-            if (superClassTxt.isEmpty() || superClassTxt.equals("Other")) superClassTxt= object.getString("Super-Class2");
-            if (superClassTxt.isEmpty()) superClassTxt="Not Available";
-
             class1Txt=object.getString("Class");
-            if (class1Txt.isEmpty() || class1Txt.equals("Other")) class1Txt= object.getString("Class2");
             if (class1Txt.isEmpty()) class1Txt="Not Available";
 
             subClassTxt=object.getString("Sub-Class");
-            if (subClassTxt.isEmpty() || subClassTxt.equals("Other")) subClassTxt= object.getString("Sub-Class2");
             if (subClassTxt.isEmpty()) subClassTxt="Not Available";
 
-            infraClassTxt=object.getString("Infra-Class");
-            if (infraClassTxt.isEmpty() || infraClassTxt.equals("Other")) infraClassTxt= object.getString("Infra-Class2");
-            if (infraClassTxt.isEmpty()) infraClassTxt="Not Available";
-
-            superOrderTxt=object.getString("Super-Order");
-            if (superOrderTxt.isEmpty() || superOrderTxt.equals("Other")) superOrderTxt= object.getString("Super-Order2");
-            if (superOrderTxt.isEmpty()) superOrderTxt="Not Available";
-
             orderTxt=object.getString("Order");
-            if (orderTxt.isEmpty() || orderTxt.equals("Other")) orderTxt= object.getString("Order2");
             if (orderTxt.isEmpty()) orderTxt="Not Available";
 
             subOrderTxt=object.getString("Sub-Order");
-            if (subOrderTxt.isEmpty() || subOrderTxt.equals("Other")) subOrderTxt= object.getString("Sub-Order2");
             if (subOrderTxt.isEmpty()) subOrderTxt="Not Available";
 
-            infraOrderTxt=object.getString("Infra-Order");
-            if (infraOrderTxt.isEmpty() || infraOrderTxt.equals("Other")) infraOrderTxt= object.getString("Infra-Order2");
-            if (infraOrderTxt.isEmpty()) infraOrderTxt="Not Available";
+            seriesTxt=object.getString("Series");
+            if (seriesTxt.isEmpty()) seriesTxt="Not Available";
+
+            cohortTxt=object.getString("Cohort");
+            if (cohortTxt.isEmpty()) cohortTxt="Not Available";
 
             familyTxt=object.getString("Family");
             if (familyTxt.isEmpty() || familyTxt.equals("Other")) familyTxt= object.getString("Family2");
@@ -249,13 +193,24 @@ public class SpecimenDetails extends AppCompatActivity {
             descriptionTxt=object.getString("Description");
             if (descriptionTxt.isEmpty()) descriptionTxt="Not Available";
 
-            refTxt=object.getString("References");
-            if (refTxt.isEmpty()) refTxt="Not Available";
+            ref1Txt=object.getString("References1");
+            if (ref1Txt.isEmpty()) ref1Txt="Not Available";
+
+            ref2Txt=object.getString("References2");
+            if (ref2Txt.isEmpty()) ref2Txt="Not Available";
+
+            ref3Txt=object.getString("References3");
+            if (ref3Txt.isEmpty()) ref3Txt="Not Available";
+
+            morphImageTxt=object.getString("Morphology");
+            if (morphImageTxt.isEmpty()) morphImageTxt="Not Available";
+
+            reproImageTxt=object.getString("Reproductive");
+            if (morphImageTxt.isEmpty()) morphImageTxt="Not Available";
             updateViews();
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     private void updateViews() {
@@ -263,29 +218,22 @@ public class SpecimenDetails extends AppCompatActivity {
             commonName.setText(commonNameTxt);
             sciName.setText(sciNameTxt);
             kingdom.setText(kingdomTxt);
-            subKingdom.setText(subKingdomTxt);
-            infraKingdom.setText(infraKingdomTxt);
-            grade.setText(gradeTxt);
             division.setText(divisionTxt);
             subDivision.setText(subDivisionTxt);
-            phylum.setText(phylumTxt);
-            group.setText(groupTxt);
-            subPhylum.setText(subPhylumTxt);
-            superClass.setText(superClassTxt);
             class1.setText(class1Txt);
             subClass.setText(subClassTxt);
-            infraClass.setText(infraClassTxt);
-            superOrder.setText(superOrderTxt);
             order.setText(orderTxt);
             subOrder.setText(subOrderTxt);
-            infraOrder.setText(infraOrderTxt);
+            series.setText(seriesTxt);
+            cohort.setText(cohortTxt);
             family.setText(familyTxt);
             genus.setText(genusTxt);
             description.setText(descriptionTxt);
-            ref.setText(refTxt);
+            ref1.setText(ref1Txt);
+            ref2.setText(ref2Txt);
+            ref3.setText(ref3Txt);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
 }

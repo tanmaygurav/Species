@@ -65,7 +65,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 savePref("Biology Specimens");
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),BotanyMainActivity.class);
                 intent.putExtra("CupboardNo","Biology Specimens");
                 startActivity(intent);
             }

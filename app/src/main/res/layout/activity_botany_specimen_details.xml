@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Botany_Specimen_Details">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/idCommonNameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/common_name"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/idSpecimenCommonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/idCommonNameHeader"
+            android:text="@string/common_name"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/idSciNameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSpecimenCommonName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/scientific_name"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/idSpecimenSciName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSpecimenCommonName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/idCommonNameHeader"
+            android:text="@string/scientific_name"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/idKingdomHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSpecimenSciName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/kingdom"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/idKingdom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSpecimenSciName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@id/idCommonNameHeader"
+            android:text="@string/kingdom"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/idMoreKingdom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idKingdom"
+            android:layout_alignParentEnd="true"
+            android:text="@string/more"
+            android:textColor="@color/teal_200"
+            android:layout_margin="20dp"/>
+
+        <RelativeLayout
+            android:id="@+id/idMoreKingdomViews"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/idKingdom">
+
+
+            <TextView
+                android:id="@+id/idDivisionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/division"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idDivision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="@string/division"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubDivisionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idDivision"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Sub Division"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubDivision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idDivision"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Sub Division"
+                android:textSize="24sp" />
+
+
+            <TextView
+                android:id="@+id/idClassHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubDivision"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Class"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubDivision"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Class"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubClassHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idClass"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Sub-Class"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idClass"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Sub-Class"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idOrderHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubClass"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Order"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubClass"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Order"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubOrderHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idOrder"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Sub-Order"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSubOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idOrder"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Sub-Order"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSeriesHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubOrder"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/series"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSubOrder"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="@string/series"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idCohortHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSeriesHeader"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/cohort"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idCohort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idSeriesHeader"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="@string/cohort"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idFamilyHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idCohort"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Family"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idFamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idCohort"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Family"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idGenusHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idFamily"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Genus"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idGenus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idFamily"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idSubDivisionHeader"
+                android:text="Genus"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idMoreGenus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idGenus"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:text="@string/more"
+                android:textColor="@color/teal_200" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/idMoreGenusViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idMoreKingdomViews">
+
+            <Button
+                android:id="@+id/idMorphologyImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idReferences3"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/morphology_image" />
+
+            <Button
+                android:id="@+id/idReproductiveImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idMorphologyImage"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/reproductive_image" />
+
+            <TextView
+                android:id="@+id/idDescriptionHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Description"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idDescriptionHeader"
+                android:text="Description"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferencesHeader1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idDescription"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="References"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferences1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idDescription"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idDescriptionHeader"
+                android:text="References"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferencesHeader2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idReferences1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="References"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferences2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idReferences1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idDescriptionHeader"
+                android:text="References"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferencesHeader3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idReferences2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="References"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/idReferences3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idReferences2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/idDescriptionHeader"
+                android:text="References"
+                android:textSize="24sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

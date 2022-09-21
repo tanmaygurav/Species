@@ -23,7 +23,9 @@ public class SpecimenModel {
         this.specimen_image = specimen_image;
     }
 
-    public SpecimenModel(TextView commonName, TextView sciName) {
+    public SpecimenModel(String common_name, String scientific_name) {
+        this.common_name = common_name;
+        this.scientific_name = scientific_name;
     }
 
     public String getFormaldehydeChangeTimer() {

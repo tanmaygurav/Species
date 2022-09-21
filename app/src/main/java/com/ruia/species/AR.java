@@ -85,10 +85,6 @@ public class AR extends AppCompatActivity {
             }
 
 
-        commonName.setText(ProjectName);
-        SciName.setText(ScientificName);
-
-
         displayAR();
     }
 

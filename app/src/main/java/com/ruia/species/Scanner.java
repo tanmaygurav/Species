@@ -63,17 +63,27 @@ public class Scanner extends AppCompatActivity {
                 Log.d(TAG, "onCodeScanned: qr"+data);
                 String checkCupboard =data.substring(0,2);
                 Log.d(TAG, "onCodeScanned: checkCupboard"+checkCupboard);
-                if (checkCupboard.equals("CB") || checkCupboard.equals("CZ")) {
-                    Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
+                if (checkCupboard.equals("CZ")) {
                     split=data.split("_",0);
+                    Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
                     cupboardNo=split[0];
                     phylum=split[1];
                     Intent intent = new Intent(Scanner.this, MainActivity.class);
                     intent.putExtra("CupboardNo", cupboardNo);
                     intent.putExtra("Phylum", phylum);
                     startActivity(intent);
-                }else {
-                    Intent intent1 = new Intent(Scanner.this, SpecimenDetails.class);
+                }else if (checkCupboard.equals("CB")){
+                    split=data.split("_",0);
+                    Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
+                    cupboardNo=split[0];
+                    phylum=split[1];
+                    Intent intent = new Intent(Scanner.this, BotanyMainActivity.class);
+                    intent.putExtra("CupboardNo", cupboardNo);
+                    intent.putExtra("Phylum", phylum);
+                    startActivity(intent);
+
+                } else {
+                    Intent intent1 = new Intent(Scanner.this, Botany_Specimen_Details.class);
                     intent1.putExtra("SciName", data);
                     startActivity(intent1);
                 }
