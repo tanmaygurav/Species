@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.squareup.picasso.Picasso;
@@ -44,7 +45,7 @@ public class SpecimenDetails extends AppCompatActivity {
             infraClass, superOrder, order, subOrder, infraOrder, family, genus, description, ref;
     String commonNameTxt, sciNameTxt, kingdomTxt, subKingdomTxt, infraKingdomTxt, gradeTxt, divisionTxt,
             subDivisionTxt, phylumTxt, groupTxt, subPhylumTxt, superClassTxt, class1Txt, subClassTxt,
-            infraClassTxt, superOrderTxt, orderTxt, subOrderTxt, infraOrderTxt, familyTxt, genusTxt, descriptionTxt, refTxt;
+            infraClassTxt, superOrderTxt, orderTxt, subOrderTxt, infraOrderTxt, familyTxt, genusTxt, descriptionTxt, refTxt,extLinksTxt;
     ImageView specimenImage;
     RelativeLayout moreKingdomViews, moreGenusViews;
     TextView moreKingdom,moreGenus;
@@ -121,6 +122,26 @@ public class SpecimenDetails extends AppCompatActivity {
             Intent intent1 = new Intent(getApplicationContext(),ModelCheck.class);
             intent1.putExtra("SciName",selectedSpecimen);
             startActivity(intent1);
+        });
+
+        ref.setOnClickListener(view -> {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ref.getText().toString()));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.d(TAG, "onCreate: Reference link "+e);
+                Toast.makeText(getApplicationContext(),"URl Not Found",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        extLinks.setOnClickListener(view -> {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(extLinksTxt));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.d(TAG, "onCreate: External link "+e);
+                Toast.makeText(getApplicationContext(),"URl Not Found",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -251,6 +272,9 @@ public class SpecimenDetails extends AppCompatActivity {
 
             refTxt=object.getString("References");
             if (refTxt.isEmpty()) refTxt="Not Available";
+
+            extLinksTxt=object.getString("External links");
+            if (extLinksTxt.isEmpty()) extLinksTxt="Not Available";
             updateViews();
         }catch (Exception e){
             e.printStackTrace();

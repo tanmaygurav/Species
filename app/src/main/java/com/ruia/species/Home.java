@@ -20,7 +20,7 @@ public class Home extends AppCompatActivity {
     private static final String TAG = "Home";
     private final String username="DEMO";
     private TextView userName;
-    private Button qr, allSpecimensZ,allSpecimensB;
+    private Button qrB,qrZ, allSpecimensZ,allSpecimensB;
 
 //    private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -32,7 +32,8 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         userName=findViewById(R.id.idUserName);
-        qr=findViewById(R.id.idScanQR);
+        qrB=findViewById(R.id.idScanQRB);
+        qrZ=findViewById(R.id.idScanQRZ);
         allSpecimensZ=findViewById(R.id.idAllSpecimensZ);
         allSpecimensB=findViewById(R.id.idAllSpecimensB);
 
@@ -64,15 +65,25 @@ public class Home extends AppCompatActivity {
         allSpecimensB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                savePref("Biology Specimens");
+                savePref("Botany Specimens");
                 Intent intent = new Intent(getApplicationContext(),BotanyMainActivity.class);
-                intent.putExtra("CupboardNo","Biology Specimens");
+                intent.putExtra("CupboardNo","Botany Specimens");
                 startActivity(intent);
             }
         });
 
-        qr.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(),Scanner.class));
+        qrB.setOnClickListener(view -> {
+            savePref("Botany Specimens");
+            Intent intent1=new Intent(getApplicationContext(),Scanner.class);
+            intent1.putExtra("dep","Botany Specimens");
+            startActivity(intent1);
+        });
+
+        qrZ.setOnClickListener(view -> {
+            savePref("Zoology Specimens");
+            Intent intent2=new Intent(getApplicationContext(),Scanner.class);
+            intent2.putExtra("dep","Zoology Specimens");
+            startActivity(intent2);
         });
 
     }
@@ -81,7 +92,6 @@ public class Home extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putString("Dep",dep);
-
 
         editor.apply();
     }

@@ -91,7 +91,7 @@ public class BotanyMainActivity extends AppCompatActivity {
 
         header.setText(HeaderTxt);
 //      select url for bio or zoo
-        if (HeaderTxt.equals("Biology Specimens")) {
+        if (HeaderTxt.equals("Botany Specimens")) {
             getSpecimensB(urlBT);
         } else if ((HeaderTxt.substring(0,2).equals("CB"))){
             getCupboardSpecimens(HeaderTxt);
@@ -120,7 +120,7 @@ public class BotanyMainActivity extends AppCompatActivity {
                         sciNameTxt= object.getString("Scientific Name");
                         imageTxt=object.getString("Morphology");
                         String locationTxt = object.getString("Location");
-                        Log.d(TAG, "run: locato"+locationTxt);
+                        Log.d(TAG, "run: location"+locationTxt);
                         if (headerTxt.equals(locationTxt.substring(0,5))){
                             Log.d(TAG, "getCupboardSpecimens: Model Added"+sciNameTxt);
                             SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt);

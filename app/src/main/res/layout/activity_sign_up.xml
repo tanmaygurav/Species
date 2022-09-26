@@ -20,7 +20,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/app_name"
                 android:padding="5dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/specieslogo"
                 android:layout_centerHorizontal="true"/>
 
             <TextView

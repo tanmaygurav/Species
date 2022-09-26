@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -113,6 +114,40 @@ public class Botany_Specimen_Details extends AppCompatActivity {
             }
 
         });
+
+//        ref onclick
+        ref1.setOnClickListener(view -> {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ref1.getText().toString()));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.d(TAG, "onCreate: Reference link "+e);
+                Toast.makeText(getApplicationContext(),"URl Not Found",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        ref2.setOnClickListener(view -> {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ref2.getText().toString()));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.d(TAG, "onCreate: Reference link "+e);
+                Toast.makeText(getApplicationContext(),"URl Not Found",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        ref3.setOnClickListener(view -> {
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ref3.getText().toString()));
+                startActivity(browserIntent);
+            }catch (Exception e){
+                Log.d(TAG, "onCreate: Reference link "+e);
+                Toast.makeText(getApplicationContext(),"URl Not Found",Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     private void getDetails() {
@@ -132,6 +167,7 @@ public class Botany_Specimen_Details extends AppCompatActivity {
                         sciNameTxt= object.getString("Scientific Name");
                         Log.d(TAG, "run: sciNameTxt"+sciNameTxt);
                         if (sciNameTxt.equals(selectedSpecimen)){
+                            Log.d(TAG, "getDetails: Specimen Found"+sciNameTxt);
                             Botany_Specimen_Details.this.runOnUiThread(() -> getValues(object));
                             break;
                         }

@@ -91,24 +91,61 @@ public class MainActivity extends AppCompatActivity {
 
         header.setText(HeaderTxt);
 //      select url for bio or zoo
-        if (HeaderTxt.equals("Zoology Specimens") || (HeaderTxt.substring(0,2).equals("CZ")))getSpecimensZ(urlZT);
-        else Toast.makeText(getApplicationContext(),"Error in Header",Toast.LENGTH_SHORT).show();
-        
-        new CountDownTimer(30000,1000) {
-            @Override
-            public void onTick(long l) {
-                Log.d(TAG, "onTick: seconds remaining: " + l / 1000);
-            }
 
-            @Override
-            public void onFinish() {
-                handler.removeCallbacks(runnable);
-                Log.d(TAG, "onFinish: Callback removed");
-            }
-        }.start();
+        if (HeaderTxt.equals("Zoology Specimens")) {
+            getSpecimensZ(urlZT);
+        } else if ((HeaderTxt.substring(0,2).equals("CZ"))){
+            getCupboardSpecimens(HeaderTxt);
 
+        }else Toast.makeText(getApplicationContext(),"Error in Header",Toast.LENGTH_SHORT).show();
     }
 
+    private void getCupboardSpecimens(String headerTxt) {
+        specimenModelArrayList = new ArrayList<>();
+        loading = ProgressDialog.show(this,"Loading","Please Wait",false,true);
+        Thread thread= new Thread(() -> {
+            Log.d(TAG, "run: Thread running");
+            try {
+
+                Request request = new Request.Builder().url(urlZT).build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String jsonData = Objects.requireNonNull(response.body()).string();
+//                        Log.d(TAG, "run: jsonData"+jsonData);
+                    JSONObject Jobject = new JSONObject(jsonData);
+                    JSONArray Jarray = Jobject.getJSONArray("details");
+                    for (int i = 0; i < Jarray.length(); i++) {
+                        JSONObject object = Jarray.getJSONObject(i);
+                        commonNameTxt=object.getString("Common Name");
+                        sciNameTxt= object.getString("Scientific Name");
+                        String locationTxt = object.getString("Location");
+                        Log.d(TAG, "run: location"+locationTxt);
+                        if (headerTxt.equals(locationTxt.substring(0,5))){
+                            Log.d(TAG, "getCupboardSpecimens: Model Added"+sciNameTxt+" "+locationTxt);
+                            SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt);
+                            specimenModelArrayList.add(model);
+                        }
+                    }
+                    if (loading.isShowing()) {
+                        loading.dismiss();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+//                loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
+            }
+
+        });
+        thread.start();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        projectRV.setLayoutManager(linearLayoutManager);
+        BSpecimenAdapter specimenAdapter1 = new BSpecimenAdapter(getApplicationContext(),specimenModelArrayList);
+        projectRV.setAdapter(specimenAdapter1);
+    }
 
 
     private void getSpecimensZ(String url) {

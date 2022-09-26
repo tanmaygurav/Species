@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +24,7 @@ public class Scanner extends AppCompatActivity {
     private static final String TAG = "Scanner";
     private final String username="TANMAY";
     private ScannerLiveView camera;
-    String SciName,cupboardNo, phylum;
+    String SciName,cupboardNo, phylum,dep;
     String [] split;
 
 
@@ -37,6 +39,7 @@ public class Scanner extends AppCompatActivity {
         } else {
             requestPermission();
         }
+        loadPref();
 
         camera = findViewById(R.id.idCamView);
         camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
@@ -60,10 +63,12 @@ public class Scanner extends AppCompatActivity {
 
             @Override
             public void onCodeScanned(String data) {
-                Log.d(TAG, "onCodeScanned: qr"+data);
+                Log.d(TAG, "onCodeScanned: qr "+data);
                 String checkCupboard =data.substring(0,2);
+                String SciName=data.substring(0,1);
                 Log.d(TAG, "onCodeScanned: checkCupboard"+checkCupboard);
                 if (checkCupboard.equals("CZ")) {
+                    Log.d(TAG, "onCodeScanned: CZ");
                     split=data.split("_",0);
                     Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
                     cupboardNo=split[0];
@@ -73,6 +78,7 @@ public class Scanner extends AppCompatActivity {
                     intent.putExtra("Phylum", phylum);
                     startActivity(intent);
                 }else if (checkCupboard.equals("CB")){
+                    Log.d(TAG, "onCodeScanned: CB");
                     split=data.split("_",0);
                     Log.d(TAG, "onCodeScanned: indi "+split[0]+" "+split[1]);
                     cupboardNo=split[0];
@@ -82,13 +88,28 @@ public class Scanner extends AppCompatActivity {
                     intent.putExtra("Phylum", phylum);
                     startActivity(intent);
 
-                } else {
+                } else if (dep.equals("Botany Specimens")){
+                    Log.d(TAG, "onCodeScanned: BS");
                     Intent intent1 = new Intent(Scanner.this, Botany_Specimen_Details.class);
                     intent1.putExtra("SciName", data);
                     startActivity(intent1);
+                } else if (dep.equals("Zoology Specimens")){
+                    Log.d(TAG, "onCodeScanned: ZS");
+                    Intent intent1 = new Intent(Scanner.this, SpecimenDetails.class);
+                    intent1.putExtra("SciName", data);
+                    startActivity(intent1);
+                }else {
+                    Toast.makeText(getApplicationContext(),"Error in QR code",Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
+    }
+
+    private void loadPref() {
+        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        dep=sharedPreferences.getString("Dep","");
+        Log.d(TAG, "loadPref: Dep "+dep);
     }
 
     @Override

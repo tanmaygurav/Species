@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".FullScrnImage"
     android:id="@+id/idFullScrnImage"
-    android:src="@mipmap/ic_launcher">
+    android:src="@drawable/specieslogo">
 
 </ImageView>
