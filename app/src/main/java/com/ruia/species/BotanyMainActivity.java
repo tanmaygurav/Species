@@ -48,7 +48,7 @@ public class BotanyMainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new CountDownTimer(30000,1000) {
+        new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long l) {
                 Log.d(TAG, "onTick: seconds remaining: " + l / 1000);
@@ -65,6 +65,9 @@ public class BotanyMainActivity extends AppCompatActivity {
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
+                if (loading.isShowing()) {
+                    loading.dismiss();
+                }
                 Log.d(TAG, "run: Refresh Triggered");
                 BSpecimenAdapter specimenAdapter1 = new BSpecimenAdapter(getApplicationContext(),specimenModelArrayList);
                 projectRV.setAdapter(specimenAdapter1);
@@ -127,9 +130,6 @@ public class BotanyMainActivity extends AppCompatActivity {
                             specimenModelArrayList.add(model);
                         }
                     }
-                    if (loading.isShowing()) {
-                        loading.dismiss();
-                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                     loading = ProgressDialog.show(this,"Error",e.getMessage(),false,true);
@@ -171,9 +171,6 @@ public class BotanyMainActivity extends AppCompatActivity {
                         Log.d(TAG, "run: SciNames"+sciNameTxt);
                         SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt);
                         specimenModelArrayList.add(model);
-                    }
-                    if (loading.isShowing()) {
-                        loading.dismiss();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

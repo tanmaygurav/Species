@@ -86,14 +86,14 @@ public class SpecimenDetails extends AppCompatActivity {
         ref=findViewById(R.id.idReferences);
         specimenImage=findViewById(R.id.idSpecimenImage);
 
-        audio=findViewById(R.id.idAudio);
+
         extLinks=findViewById(R.id.idExternalLinks);
         view3D=findViewById(R.id.idView3DModel);
 
         moreKingdom=findViewById(R.id.idMoreKingdom);
         moreGenus=findViewById(R.id.idMoreGenus);
         moreGenusViews=findViewById(R.id.idMoreGenusViews);
-        moreKingdomViews=findViewById(R.id.idMoreKingdomViews);
+//        moreKingdomViews=findViewById(R.id.idMoreKingdomViews);
 
 
         getDetails();
@@ -104,13 +104,13 @@ public class SpecimenDetails extends AppCompatActivity {
             Log.d(TAG, "onCreate: SciName"+selectedSpecimen);
         }
 //        show first view till kingdom only hide rest
-        moreKingdomViews.setVisibility(View.GONE);
+//        moreKingdomViews.setVisibility(View.GONE);
         moreGenusViews.setVisibility(View.GONE);
 //        show views from kingdom to genus when user clicks more
-        moreKingdom.setOnClickListener(view -> {
-            moreKingdomViews.setVisibility(View.VISIBLE);
-            moreKingdom.setVisibility(View.GONE);
-        });
+//        moreKingdom.setOnClickListener(view -> {
+//            moreKingdomViews.setVisibility(View.VISIBLE);
+//            moreKingdom.setVisibility(View.GONE);
+//        });
 
 //        show views from genus to end when user clicks more
         moreGenus.setOnClickListener(view -> {

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class Botany_Specimen_Details extends AppCompatActivity {
     String commonNameTxt, sciNameTxt, kingdomTxt, divisionTxt, subDivisionTxt, class1Txt, subClassTxt,
             orderTxt, subOrderTxt, seriesTxt, cohortTxt, familyTxt, genusTxt, descriptionTxt, ref1Txt,
             ref2Txt, ref3Txt,morphImageTxt,reproImageTxt;
+    ImageView specimenImage;
     Button morphImage, reproImage;
     RelativeLayout moreKingdomViews, moreGenusViews;
     TextView moreKingdom,moreGenus;
@@ -62,6 +64,7 @@ public class Botany_Specimen_Details extends AppCompatActivity {
         ref1=findViewById(R.id.idReferences1);
         ref2=findViewById(R.id.idReferences2);
         ref3=findViewById(R.id.idReferences3);
+        specimenImage=findViewById(R.id.idSpecimenImage);
 
         morphImage=findViewById(R.id.idMorphologyImage);
         reproImage=findViewById(R.id.idReproductiveImage);
@@ -69,7 +72,7 @@ public class Botany_Specimen_Details extends AppCompatActivity {
         moreKingdom=findViewById(R.id.idMoreKingdom);
         moreGenus=findViewById(R.id.idMoreGenus);
         moreGenusViews=findViewById(R.id.idMoreGenusViews);
-        moreKingdomViews=findViewById(R.id.idMoreKingdomViews);
+//        moreKingdomViews=findViewById(R.id.idMoreKingdomViews);
 
         Intent intent=getIntent();
         Bundle extras = intent.getExtras();
@@ -79,13 +82,13 @@ public class Botany_Specimen_Details extends AppCompatActivity {
         }
         getDetails();
 //        show first view till kingdom only hide rest
-        moreKingdomViews.setVisibility(View.GONE);
+//        moreKingdomViews.setVisibility(View.GONE);
         moreGenusViews.setVisibility(View.GONE);
 //        show views from kingdom to genus when user clicks more
-        moreKingdom.setOnClickListener(view -> {
-            moreKingdomViews.setVisibility(View.VISIBLE);
-            moreKingdom.setVisibility(View.GONE);
-        });
+//        moreKingdom.setOnClickListener(view -> {
+//            moreKingdomViews.setVisibility(View.VISIBLE);
+//            moreKingdom.setVisibility(View.GONE);
+//        });
 
 //        show views from genus to end when user clicks more
         moreGenus.setOnClickListener(view -> {
@@ -243,6 +246,18 @@ public class Botany_Specimen_Details extends AppCompatActivity {
 
             reproImageTxt=object.getString("Reproductive");
             if (morphImageTxt.isEmpty()) morphImageTxt="Not Available";
+
+
+            try {
+                Log.d(TAG, "onBindViewHolder: substring"+morphImageTxt.substring(0,24));
+                String[] p=morphImageTxt.split("/");
+                //Create the new image link
+                String imageLink="https://drive.google.com/uc?export=download&id="+p[5];
+                Picasso.get().load(imageLink).into(specimenImage);
+                Log.d("Adapter", "onBindViewHolder: Image Set");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             updateViews();
         }catch (Exception e){
             e.printStackTrace();

@@ -5,6 +5,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idAllSpecimensBCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:elevation="8dp"
+        android:layout_below="@id/idWelcome">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/idAllSpecimensBImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/botany_thum" />
+
+            <TextView
+                android:id="@+id/idAllSpecimensBHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idAllSpecimensBImage"
+                android:layout_centerHorizontal="true"
+                android:text="All Specimens Botany"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idAllSpecimensZCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:elevation="8dp"
+        android:layout_toRightOf="@id/idAllSpecimensBCard"
+        android:layout_below="@id/idWelcome">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/idAllSpecimensZImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/zoology_thum" />
+
+            <TextView
+                android:id="@+id/idAllSpecimensZHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idAllSpecimensZImage"
+                android:layout_centerHorizontal="true"
+                android:text="All Specimens Zoology"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idScanQRZCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:elevation="8dp"
+        android:layout_toRightOf="@id/idAllSpecimensBCard"
+        android:layout_below="@id/idAllSpecimensBCard">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/idScanQRZImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/zoologygrid" />
+
+            <TextView
+                android:id="@+id/idScanQRZHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idScanQRZImage"
+                android:layout_centerHorizontal="true"
+                android:text="Scan QR Zoology"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idScanQRBCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:elevation="8dp"
+        android:layout_below="@id/idAllSpecimensBCard">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/idScanQRBImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/botanygrid" />
+
+            <TextView
+                android:id="@+id/idScanQRBHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/idScanQRBImage"
+                android:layout_centerHorizontal="true"
+                android:text="Scan QR Botany"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
     <TextView
         android:id="@+id/idWelcome"
         android:layout_width="wrap_content"
@@ -31,7 +179,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="All Specimens Zoology" />
+        android:text="All Specimens Zoology"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/idAllSpecimensB"
@@ -43,7 +192,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="All Specimens Botany" />
+        android:text="All Specimens Botany"
+        android:visibility="gone"/>
     <Button
         android:id="@+id/idScanQRB"
         android:layout_width="wrap_content"
@@ -53,7 +203,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Scan QR Code Botany" />
+        android:text="Scan QR Code Botany"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/idScanQRZ"
@@ -65,6 +216,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="Scan QR Code Zoology" />
+        android:text="Scan QR Code Zoology"
+        android:visibility="gone"/>
 
 </RelativeLayout>

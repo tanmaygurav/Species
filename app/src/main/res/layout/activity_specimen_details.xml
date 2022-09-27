@@ -17,11 +17,23 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/specieslogo" />
 
+        <Button
+            android:id="@+id/idView3DModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idSpecimenImage"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="View 3D Model" />
+
         <TextView
             android:id="@+id/idCommonNameHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idSpecimenImage"
+            android:layout_below="@id/idView3DModel"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
@@ -33,7 +45,7 @@
             android:id="@+id/idSpecimenCommonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idSpecimenImage"
+            android:layout_below="@id/idView3DModel"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
@@ -98,26 +110,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/idKingdom"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/more"
             android:textColor="@color/teal_200"
-            android:layout_margin="20dp"/>
+            android:visibility="gone"/>
 
-        <RelativeLayout
-            android:id="@+id/idMoreKingdomViews"
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/idMoreKingdomViews"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/idKingdom">-->
+
+        <TextView
+            android:id="@+id/idSubKingdomHeader"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@id/idKingdom">
-
-            <TextView
-                android:id="@+id/idSubKingdomHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/subkingdom"
-                android:textSize="24sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/subkingdom"
+            android:textSize="24sp"
+            android:layout_below="@id/idKingdom"/>
 
             <TextView
                 android:id="@+id/idSubKingdom"
@@ -129,7 +146,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@id/idInfraKingdomHeader"
                 android:text="@string/subkingdom"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_below="@id/idKingdom"/>
 
             <TextView
                 android:id="@+id/idInfraKingdomHeader"
@@ -565,10 +583,10 @@
                 android:layout_margin="20dp"
                 android:text="@string/more"
                 android:textColor="@color/teal_200" />
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
         <RelativeLayout
             android:id="@+id/idMoreGenusViews"
-            android:layout_below="@id/idMoreKingdomViews"
+            android:layout_below="@id/idGenus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
@@ -622,34 +640,25 @@
                 android:textSize="24sp"
                 android:textStyle="italic"
                 android:textColor="@color/teal_700"/>
-        <Button
-            android:id="@+id/idAudio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/idReferences"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Play Audio" />
 
-        <Button
-            android:id="@+id/idView3DModel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/idReferences"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="View 3D Model" />
+<!--            <Button-->
+<!--                android:id="@+id/idAudio"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/idReferences"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:text="Play Audio" />-->
+
+
 
         <Button
             android:id="@+id/idExternalLinks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idAudio"
+            android:layout_below="@id/idReferences"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"

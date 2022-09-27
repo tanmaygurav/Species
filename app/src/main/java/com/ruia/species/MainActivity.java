@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new CountDownTimer(30000,1000) {
+        new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long l) {
                 Log.d(TAG, "onTick: seconds remaining: " + l / 1000);
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
+                if (loading.isShowing()) {
+                    loading.dismiss();
+                }
                 Log.d(TAG, "run: Refresh Triggered");
                 SpecimenAdapter specimenAdapter = new SpecimenAdapter(getApplicationContext(),specimenModelArrayList);
                 projectRV.setAdapter(specimenAdapter);
@@ -118,16 +121,14 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject object = Jarray.getJSONObject(i);
                         commonNameTxt=object.getString("Common Name");
                         sciNameTxt= object.getString("Scientific Name");
+                        imageTxt=object.getString("Image");
                         String locationTxt = object.getString("Location");
                         Log.d(TAG, "run: location"+locationTxt);
                         if (headerTxt.equals(locationTxt.substring(0,5))){
-                            Log.d(TAG, "getCupboardSpecimens: Model Added"+sciNameTxt+" "+locationTxt);
-                            SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt);
+                            Log.d(TAG, "getCupboardSpecimens: Model Added"+sciNameTxt+" "+locationTxt+" "+imageTxt);
+                            SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt,imageTxt);
                             specimenModelArrayList.add(model);
                         }
-                    }
-                    if (loading.isShowing()) {
-                        loading.dismiss();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -172,9 +173,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "run: SciNames"+sciNameTxt);
                         SpecimenModel model = new SpecimenModel(commonNameTxt,sciNameTxt,imageTxt);
                         specimenModelArrayList.add(model);
-                    }
-                    if (loading.isShowing()) {
-                        loading.dismiss();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
